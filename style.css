@@ -2434,123 +2434,131 @@ button:hover{
    MENU HAMBÚRGUER MOBILE
 ========================= */
 
-.menu-mobile-btn {
-    display: none;
+.menu-mobile-btn{
+    display:none;
 }
 
-@media (max-width: 768px) {
-    header {
-        position: relative !important;
-        width: 100% !important;
-        height: auto !important;
-        min-height: auto !important;
-        padding: 18px 10px 22px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 16px !important;
-        overflow: visible !important;
-        z-index: 1000 !important;
+@media(max-width:768px){
+    header{
+        position:relative !important;
+        width:100% !important;
+        height:auto !important;
+        min-height:auto !important;
+        padding:18px 10px 22px !important;
+        display:flex !important;
+        flex-direction:column !important;
+        align-items:center !important;
+        justify-content:center !important;
+        gap:16px !important;
+        overflow:visible !important;
+        z-index:1000 !important;
     }
 
-    header .logo {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 14px !important;
-        margin: 0 !important;
+    header .logo{
+        display:flex !important;
+        align-items:center !important;
+        justify-content:center !important;
+        gap:14px !important;
+        margin:0 !important;
     }
 
-    header .idiomas {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 12px !important;
-        margin: 0 !important;
+    header .idiomas{
+        display:flex !important;
+        justify-content:center !important;
+        align-items:center !important;
+        gap:12px !important;
+        margin:0 !important;
     }
 
-    header nav.menu {
-        width: 100% !important;
-        min-height: 48px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 10px !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: visible !important;
-        position: relative !important;
-        z-index: 9999 !important;
+    header nav.menu{
+        display:flex !important;
+        width:100% !important;
+        min-height:55px !important;
+        flex-direction:column !important;
+        align-items:center !important;
+        justify-content:center !important;
+        gap:10px !important;
+        overflow:visible !important;
+        position:relative !important;
+        z-index:99999 !important;
+        margin:0 !important;
+        padding:0 !important;
     }
 
-    header nav.menu .menu-mobile-btn {
-        display: block !important;
-        width: 220px !important;
-        min-height: 44px !important;
-        padding: 12px 18px !important;
-        border-radius: 999px !important;
-        background: linear-gradient(135deg, #ffd700, #ffae00) !important;
-        color: #000 !important;
-        border: none !important;
-        font-size: 15px !important;
-        font-weight: 900 !important;
-        letter-spacing: 1px !important;
-        text-align: center !important;
-        cursor: pointer !important;
-        box-shadow: 0 0 18px rgba(255, 215, 0, .45) !important;
+    header nav.menu #btn-menu-mobile,
+    header nav.menu .menu-mobile-btn,
+    #btn-menu-mobile{
+        display:flex !important;
+        visibility:visible !important;
+        opacity:1 !important;
+        width:220px !important;
+        min-height:46px !important;
+        align-items:center !important;
+        justify-content:center !important;
+        padding:12px 18px !important;
+        margin:5px auto 0 !important;
+        border-radius:999px !important;
+        background:linear-gradient(135deg,#ffd700,#ffae00) !important;
+        color:#000 !important;
+        border:none !important;
+        font-size:15px !important;
+        font-weight:900 !important;
+        letter-spacing:1px !important;
+        text-align:center !important;
+        cursor:pointer !important;
+        box-shadow:0 0 18px rgba(255,215,0,.45) !important;
+        position:relative !important;
+        z-index:999999 !important;
     }
 
-    header nav.menu > a {
-        display: none !important;
+    header nav.menu > a{
+        display:none !important;
     }
 
-    header nav.menu.menu-aberto > a {
-        display: block !important;
-        width: 220px !important;
-        text-align: center !important;
-        padding: 11px 14px !important;
-        border-radius: 12px !important;
-        background: rgba(255, 255, 255, .08) !important;
-        border: 1px solid rgba(255, 215, 0, .28) !important;
-        color: #fff !important;
+    header nav.menu.menu-aberto > a{
+        display:block !important;
+        width:220px !important;
+        text-align:center !important;
+        padding:11px 14px !important;
+        border-radius:12px !important;
+        background:rgba(255,255,255,.08) !important;
+        border:1px solid rgba(255,215,0,.28) !important;
+        color:#fff !important;
     }
 
     #inicio,
-    .hero {
-        margin-top: 0 !important;
-        padding: 40px 10px 70px !important;
-        min-height: auto !important;
+    .hero{
+        margin-top:0 !important;
+        padding:40px 10px 70px !important;
+        min-height:auto !important;
     }
 
-    .hero .container {
-        width: 100% !important;
-        max-width: 92% !important;
-        margin: 0 auto !important;
-        padding: 28px 14px !important;
+    .hero .container{
+        width:100% !important;
+        max-width:92% !important;
+        margin:0 auto !important;
+        padding:28px 14px !important;
     }
 
-    .hero h1 {
-        font-size: 38px !important;
-        line-height: 1.08 !important;
-        margin: 0 0 18px !important;
+    .hero h1{
+        font-size:38px !important;
+        line-height:1.08 !important;
+        margin:0 0 18px !important;
     }
 
-    .hero p {
-        font-size: 20px !important;
-        line-height: 1.25 !important;
-        margin: 0 0 28px !important;
+    .hero p{
+        font-size:20px !important;
+        line-height:1.25 !important;
+        margin:0 0 28px !important;
     }
 
-    .hero button {
-        width: 100% !important;
-        max-width: 300px !important;
-        padding: 18px 18px !important;
-        font-size: 17px !important;
+    .hero button{
+        width:100% !important;
+        max-width:300px !important;
+        padding:18px 18px !important;
+        font-size:17px !important;
     }
 }
-
 /* =========================
    CORREÇÃO DESKTOP - HEADER NO TOPO
 ========================= */
