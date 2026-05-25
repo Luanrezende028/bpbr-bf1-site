@@ -2519,121 +2519,166 @@ button:hover{
 }
 
 /* =====================================================
-   CORREÇÃO FINAL - DESKTOP + MENU MOBILE
-   Substitui os blocos antigos que quebravam o PC
+   CORREÇÃO FINAL BPBR - DESKTOP + MOBILE
+   Mantenha este bloco SEMPRE no final do arquivo.
 ===================================================== */
 
-/* Botão hambúrguer escondido no computador */
 .menu-mobile-btn{
-    display:none;
+    display:none !important;
 }
 
-/* DESKTOP: mantém o menu fixo no topo */
-@media (min-width: 769px){
+@media (min-width: 901px){
+
+    body{
+        padding-top:123px !important;
+    }
 
     header{
         position:fixed !important;
         top:0 !important;
         left:0 !important;
-        right:auto !important;
+        right:0 !important;
         bottom:auto !important;
         width:100% !important;
-        height:auto !important;
+        height:123px !important;
+        padding:16px 40px !important;
         display:flex !important;
         flex-direction:row !important;
-        justify-content:space-between !important;
         align-items:center !important;
-        padding:16px 40px !important;
+        justify-content:space-between !important;
+        gap:20px !important;
+        background:rgba(0,0,0,.92) !important;
+        border-bottom:1px solid rgba(255,215,0,.25) !important;
+        z-index:99999 !important;
         box-sizing:border-box !important;
-        z-index:9999 !important;
+        transform:none !important;
     }
 
     .logo{
         display:flex !important;
-        flex-direction:row !important;
         align-items:center !important;
+        justify-content:flex-start !important;
         gap:14px !important;
         margin:0 !important;
+        flex:0 0 auto !important;
     }
 
     .logo img{
-        width:90px !important;
-        height:90px !important;
+        width:78px !important;
+        height:78px !important;
+        object-fit:contain !important;
     }
 
     .logo span,
     .logo h1{
         font-size:32px !important;
-        margin:0 !important;
         line-height:1 !important;
+        margin:0 !important;
+        color:#ffd700 !important;
     }
 
-    .idiomas{
+    .idiomas,
+    .language-selector{
         display:flex !important;
-        flex-direction:row !important;
         align-items:center !important;
+        justify-content:center !important;
         gap:12px !important;
         margin-left:auto !important;
         margin-right:25px !important;
+        flex:0 0 auto !important;
     }
 
-    .flag{
-        width:40px !important;
-        height:40px !important;
+    .flag,
+    .idiomas img,
+    .language-selector img{
+        width:46px !important;
+        height:46px !important;
+        border-radius:50% !important;
+        object-fit:cover !important;
     }
 
+    nav,
     .menu{
         display:flex !important;
         flex-direction:row !important;
-        justify-content:flex-end !important;
         align-items:center !important;
-        gap:24px !important;
+        justify-content:flex-end !important;
+        flex-wrap:nowrap !important;
+        gap:18px !important;
         width:auto !important;
         max-width:none !important;
         margin:0 !important;
         padding:0 !important;
+        position:static !important;
+        transform:none !important;
     }
 
+    nav a,
     .menu a{
         display:inline-block !important;
         width:auto !important;
-        padding:0 !important;
+        color:#fff !important;
+        text-decoration:none !important;
         background:transparent !important;
         border:none !important;
         border-radius:0 !important;
+        padding:0 !important;
+        margin:0 !important;
         font-size:12px !important;
-        color:white !important;
-    }
-
-    .menu-mobile-btn{
-        display:none !important;
+        font-weight:800 !important;
+        white-space:nowrap !important;
     }
 
     .secao{
-        min-height:100vh !important;
-        padding:140px 20px !important;
+        min-height:calc(100vh - 123px) !important;
+        padding:90px 20px !important;
     }
 
-    #inicio{
-        min-height:100vh !important;
-        padding:140px 20px !important;
+    #inicio,
+    .hero{
+        display:flex !important;
+        flex-direction:column !important;
+        align-items:center !important;
+        justify-content:center !important;
+        text-align:center !important;
+        min-height:calc(100vh - 123px) !important;
+        padding:90px 20px !important;
         margin:0 !important;
+        box-sizing:border-box !important;
+    }
+
+    #inicio .container,
+    .hero .container{
+        margin:0 auto !important;
+        max-width:900px !important;
+        width:auto !important;
+        transform:none !important;
     }
 }
 
-/* MOBILE: header premium + menu hambúrguer */
-@media (max-width: 768px){
+@media (max-width: 900px){
+
+    body{
+        padding-top:0 !important;
+    }
 
     header{
         position:relative !important;
+        top:auto !important;
+        left:auto !important;
+        right:auto !important;
+        bottom:auto !important;
+        width:100% !important;
         height:auto !important;
         padding:16px 12px 18px !important;
         display:flex !important;
         flex-direction:column !important;
         align-items:center !important;
+        justify-content:center !important;
         gap:14px !important;
         background:rgba(0,0,0,.96) !important;
-        z-index:9999 !important;
+        z-index:999 !important;
+        box-sizing:border-box !important;
     }
 
     .logo{
@@ -2658,7 +2703,8 @@ button:hover{
         line-height:1 !important;
     }
 
-    .idiomas{
+    .idiomas,
+    .language-selector{
         display:flex !important;
         justify-content:center !important;
         align-items:center !important;
@@ -2666,21 +2712,26 @@ button:hover{
         margin:0 !important;
     }
 
-    .flag{
+    .flag,
+    .idiomas img,
+    .language-selector img{
         width:58px !important;
         height:36px !important;
         object-fit:cover !important;
         border-radius:50px !important;
     }
 
+    nav.menu,
     .menu{
         display:flex !important;
         flex-direction:column !important;
         align-items:center !important;
+        justify-content:center !important;
         gap:10px !important;
-        margin:0 !important;
-        padding:0 !important;
+        width:100% !important;
         max-width:360px !important;
+        margin:0 auto !important;
+        padding:0 !important;
     }
 
     .menu-mobile-btn{
@@ -2695,7 +2746,7 @@ button:hover{
         letter-spacing:1px !important;
         cursor:pointer !important;
         box-shadow:0 0 18px rgba(255,215,0,.45) !important;
-        margin:5px auto 0 !important;
+        margin:4px auto 0 !important;
     }
 
     .menu a{
@@ -2710,31 +2761,64 @@ button:hover{
         border-radius:12px !important;
         background:rgba(255,255,255,.06) !important;
         border:1px solid rgba(255,215,0,.25) !important;
-        font-size:12px !important;
+        color:#fff !important;
         text-decoration:none !important;
+        font-size:13px !important;
+        font-weight:900 !important;
     }
 
-    #inicio{
-        padding:40px 14px 65px !important;
+    .secao{
+        padding:60px 16px 70px !important;
         min-height:auto !important;
     }
 
-    #inicio h1{
+    #inicio,
+    .hero{
+        padding:45px 14px 65px !important;
+        min-height:auto !important;
+    }
+
+    #inicio h1,
+    .hero h1{
         font-size:38px !important;
         line-height:1.12 !important;
         margin-bottom:18px !important;
     }
 
-    #inicio p{
+    #inicio p,
+    .hero p{
         font-size:18px !important;
         margin-bottom:28px !important;
     }
 
-    #inicio button{
+    #inicio button,
+    .hero button{
         width:88% !important;
         max-width:360px !important;
         padding:18px 12px !important;
         font-size:18px !important;
         border-radius:14px !important;
+    }
+
+    .alistamento-card{
+        width:90% !important;
+        padding:28px 20px !important;
+    }
+
+    .alistamento-card h2{
+        font-size:38px !important;
+        line-height:1.05 !important;
+        margin-bottom:20px !important;
+    }
+
+    .alistamento-card p{
+        font-size:18px !important;
+        line-height:1.45 !important;
+    }
+
+    .alistamento-card li{
+        font-size:18px !important;
+        line-height:1.25 !important;
+        padding:11px 0 !important;
     }
 }
