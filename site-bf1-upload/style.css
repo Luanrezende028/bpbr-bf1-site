@@ -2324,3 +2324,55 @@ button:hover{
         overflow:hidden !important;
     }
 }
+/* =========================
+   AJUSTE MOBILE
+========================= */
+@media (max-width: 768px) {
+
+    header {
+        padding: 10px 15px;
+    }
+
+    .logo img {
+        width: 70px;
+    }
+
+    .logo h1 {
+        font-size: 42px;
+    }
+
+    .language-selector img {
+        width: 70px;
+    }
+
+    nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    /* Corrige o corte do topo */
+    .hero,
+    .inicio,
+    #inicio {
+        padding-top: 60px !important;
+    }
+
+    .hero h1,
+    #inicio h1 {
+        font-size: 55px;
+        line-height: 1.0;
+    }
+
+    .hero p,
+    #inicio p {
+        font-size: 20px;
+    }
+
+    .hero-btn,
+    .discord-btn-home {
+        width: 90%;
+        font-size: 18px;
+    }
+}
