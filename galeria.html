@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria BPBR</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        #video-fundo{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100vw;
+            height:100vh;
+            object-fit:cover;
+            z-index:-10;
+            opacity:.62;
+            filter:brightness(1) contrast(1.08);
+        }
+
+        .pagina-galeria::before{
+            content:"";
+            position:fixed;
+            inset:0;
+            background:linear-gradient(
+                rgba(0,0,0,.18),
+                rgba(0,0,0,.42)
+            );
+            z-index:-9;
+        }
+
+        /* HEADER */
+
+        header{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:20px 50px;
+        }
+
+        .idiomas{
+            display:flex;
+            gap:12px;
+            align-items:center;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            font-weight:800;
+            transition:.3s;
+        }
+
+        nav a:hover{
+            color:gold;
+        }
+
+        /* GALERIA */
+
+        .galeria-grid{
+            width:1200px;
+            max-width:95%;
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:34px;
+            margin:50px auto;
+        }
+
+        .galeria-card{
+            position:relative;
+            border:2px solid rgba(255,215,0,.55);
+            border-radius:22px;
+            padding:7px;
+            overflow:hidden;
+            background:rgba(0,0,0,.72);
+            cursor:pointer;
+            transition:.35s ease;
+            box-shadow:
+                0 0 18px rgba(0,0,0,.45),
+                inset 0 0 0 1px rgba(255,255,255,.12);
+        }
+
+        .galeria-card:hover{
+            transform:
+                translateY(-10px)
+                scale(1.025);
+
+            border-color:gold;
+
+            box-shadow:
+                0 0 35px rgba(255,215,0,.30),
+                inset 0 0 0 1px rgba(255,215,0,.35);
+        }
+
+        .galeria-card img{
+            width:100%;
+            height:320px;
+            object-fit:cover;
+            display:block;
+            border-radius:15px;
+            border:1px solid rgba(255,255,255,.20);
+            transition:.45s ease;
+        }
+
+        .galeria-card:hover img{
+            transform:scale(1.06);
+            filter:
+                brightness(1.08)
+                contrast(1.05);
+        }
+
+        /* BRILHO */
+
+        .galeria-card::before{
+            content:"";
+            position:absolute;
+            top:7px;
+            left:-120%;
+            width:70%;
+            height:calc(100% - 14px);
+
+            background:linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,.20),
+                transparent
+            );
+
+            transform:skewX(-20deg);
+            transition:.7s ease;
+            z-index:2;
+            pointer-events:none;
+        }
+
+        .galeria-card:hover::before{
+            left:140%;
+        }
+
+        /* TEXTO VER FOTO */
+
+        .galeria-card::after{
+            content:"VER FOTO";
+            pointer-events:none;
+            position:absolute;
+            inset:7px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            border-radius:15px;
+            background:rgba(0,0,0,.42);
+            color:gold;
+            font-weight:900;
+            letter-spacing:2px;
+            opacity:0;
+            transition:.3s ease;
+            z-index:3;
+        }
+
+        .galeria-card:hover::after{
+            opacity:1;
+        }
+
+        /* FOTO GRANDE */
+
+        .lightbox{
+            display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.92);
+            z-index:9999;
+            justify-content:center;
+            align-items:center;
+            padding:30px;
+        }
+
+        .lightbox.ativo{
+            display:flex;
+        }
+
+        .lightbox img{
+            max-width:95%;
+            max-height:90vh;
+            border:2px solid gold;
+            border-radius:18px;
+            box-shadow:
+                0 0 45px rgba(255,215,0,.35);
+
+            animation:
+                abrirFoto .25s ease;
+
+            cursor:pointer;
+        }
+
+        @keyframes abrirFoto{
+            from{
+                transform:scale(.92);
+                opacity:0;
+            }
+
+            to{
+                transform:scale(1);
+                opacity:1;
+            }
+        }
+
+        @media(max-width:900px){
+
+            .galeria-grid{
+                grid-template-columns:1fr;
+            }
+
+            .galeria-card img{
+                height:240px;
+            }
+        }
+
+    </style>
+</head>
+
+<body class="pagina-galeria">
+
+    <video autoplay muted loop playsinline id="video-fundo">
+        <source src="video/fundo-galeria.mp4" type="video/mp4">
+    </video>
+
+    <!-- HEADER -->
+    <header>
+
+        <div class="logo">
+            <img src="img/logo-bpbr.png" alt="Logo BPBR">
+            <span>BPBR</span>
+        </div>
+
+        <!-- BANDEIRAS -->
+        <div class="idiomas">
+            <button class="flag br" onclick="trocarIdioma('pt')" title="Português"></button>
+
+            <button class="flag us" onclick="trocarIdioma('en')" title="English"></button>
+
+            <button class="flag ar" onclick="trocarIdioma('es')" title="Español"></button>
+        </div>
+
+        <!-- VOLTAR -->
+        <nav>
+            <a href="index.html">VOLTAR</a>
+        </nav>
+
+    </header>
+
+    <!-- GALERIA -->
+    <section class="secao">
+
+        <p class="subtitulo">( MOMENTOS DO BPBR )</p>
+
+        <h2>
+            Galeria <span>BPBR</span>
+        </h2>
+
+        <p>
+            Confira nossos momentos nos campos de batalha.
+        </p>
+
+        <div class="galeria-grid">
+
+            <div class="galeria-card">
+                <img src="img/galeria1.png">
+            </div>
+
+            <div class="galeria-card">
+                <img src="img/galeria2.png">
+            </div>
+
+            <div class="galeria-card">
+                <img src="img/galeria3.png">
+            </div>
+
+            <div class="galeria-card">
+                <img src="img/galeria4.png">
+            </div>
+
+            <div class="galeria-card">
+                <img src="img/galeria5.png">
+            </div>
+
+            <div class="galeria-card">
+                <img src="img/galeria6.png">
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOTO GRANDE -->
+    <div class="lightbox" id="lightbox">
+        <img src="" id="lightbox-img">
+    </div>
+
+    <!-- SCRIPT DO SITE -->
+    <script src="script.js"></script>
+
+    <!-- LIGHTBOX -->
+    <script>
+        const fotos =
+            document.querySelectorAll(
+                ".galeria-card img"
+            );
+
+        const lightbox =
+            document.getElementById(
+                "lightbox"
+            );
+
+        const lightboxImg =
+            document.getElementById(
+                "lightbox-img"
+            );
+
+        fotos.forEach(function(foto){
+
+            foto.addEventListener(
+                "click",
+                function(){
+
+                    lightboxImg.src =
+                        this.src;
+
+                    lightbox.classList.add(
+                        "ativo"
+                    );
+                }
+            );
+        });
+
+        lightbox.addEventListener(
+            "click",
+            function(){
+
+                lightbox.classList.remove(
+                    "ativo"
+                );
+
+                lightboxImg.src = "";
+            }
+        );
+    </script>
+
+</body>
+</html>
