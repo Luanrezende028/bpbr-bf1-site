@@ -2327,52 +2327,81 @@ button:hover{
 /* =========================
    AJUSTE MOBILE
 ========================= */
+
 @media (max-width: 768px) {
 
     header {
-        padding: 10px 15px;
+        position: relative !important;
+        height: auto !important;
+        padding: 18px 10px 22px !important;
+    }
+
+    .logo {
+        justify-content: center !important;
+        gap: 14px !important;
+        margin-bottom: 20px !important;
     }
 
     .logo img {
-        width: 70px;
+        width: 65px !important;
+        height: auto !important;
     }
 
+    .logo span,
     .logo h1 {
-        font-size: 42px;
+        font-size: 42px !important;
     }
 
+    .idiomas,
+    .language-selector {
+        justify-content: center !important;
+        margin: 0 auto 18px !important;
+        gap: 14px !important;
+    }
+
+    .flag,
+    .idiomas img,
     .language-selector img {
-        width: 70px;
+        width: 82px !important;
+        height: auto !important;
     }
 
+    .menu,
     nav ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 14px 22px !important;
+        padding: 0 !important;
+        margin: 0 !important;
     }
 
-    /* Corrige o corte do topo */
-    .hero,
-    .inicio,
+    .menu a,
+    nav ul li a {
+        font-size: 16px !important;
+    }
+
     #inicio {
-        padding-top: 60px !important;
+        min-height: auto !important;
+        padding: 35px 18px 70px !important;
+        margin-top: 0 !important;
     }
 
-    .hero h1,
     #inicio h1 {
-        font-size: 55px;
-        line-height: 1.0;
+        font-size: 46px !important;
+        line-height: 1.1 !important;
+        margin: 0 0 22px !important;
     }
 
-    .hero p,
     #inicio p {
-        font-size: 20px;
+        font-size: 20px !important;
+        margin: 0 0 34px !important;
     }
 
-    .hero-btn,
-    .discord-btn-home {
-        width: 90%;
-        font-size: 18px;
+    #inicio button {
+        width: 90% !important;
+        max-width: 430px !important;
+        padding: 22px 15px !important;
+        font-size: 22px !important;
     }
 }
