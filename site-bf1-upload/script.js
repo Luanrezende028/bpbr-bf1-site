@@ -416,6 +416,17 @@ function trocarIdioma(idioma) {
 
     localStorage.setItem("idioma", idioma);
 }
+// =====================================================
+// MENU HAMBÚRGUER MOBILE
+// =====================================================
+
+function toggleMenuMobile() {
+    const menu = document.querySelector(".menu");
+
+    if (menu) {
+        menu.classList.toggle("menu-aberto");
+    }
+}
 
 
 // =====================================================
