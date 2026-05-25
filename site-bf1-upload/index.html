@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- ================= CONFIGURAÇÕES BÁSICAS DO SITE ================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPBR Battlefield 1</title>
+
+    <!-- CSS DO SITE -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ========================================================= -->
+<!-- CABEÇALHO / LOGO / BANDEIRAS / MENU -->
+<!-- Para trocar a logo: img/logo-bpbr.png -->
+<!-- ========================================================= -->
+
+<header>
+
+    <!-- LOGO DO BPBR -->
+    <div class="logo">
+        <img src="img/logo-bpbr.png" alt="Logo BPBR">
+        <span>BPBR</span>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- BANDEIRAS DE IDIOMA -->
+    <!-- Para trocar bandeiras: img/br.png | img/us.png | img/ar.png -->
+    <!-- ========================================================= -->
+    <div class="idiomas">
+        <button class="flag br" onclick="trocarIdioma('pt')" title="Português"></button>
+        <button class="flag us" onclick="trocarIdioma('en')" title="English"></button>
+        <button class="flag ar" onclick="trocarIdioma('es')" title="Español"></button>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- MENU DO SITE -->
+    <!-- ========================================================= -->
+    <nav class="menu">
+        <a href="#inicio">INÍCIO</a>
+        <a href="#servidores">SERVIDORES</a>
+        <a href="#eventos">EVENTOS</a>
+        <a href="#vip">VIP</a>
+        <a href="#sobre">SOBRE</a>
+        <a href="#alistamento">ALISTAMENTO</a>
+        <a href="#equipe">EQUIPE</a>
+        <a href="galeria.html">GALERIA</a>
+    </nav>
+
+</header>
+<!-- ========================================================= -->
+<!-- INÍCIO / BANNER PRINCIPAL -->
+<!-- Link do Discord principal abaixo -->
+<!-- ========================================================= -->
+
+<section id="inicio" class="secao hero">
+    <div class="container">
+        <h1>BATALHÃO PARAQUEDISTA</h1>
+        <p>Comunidade Oficial Battlefield 1</p>
+
+        <!-- TROCAR LINK DO DISCORD AQUI -->
+        <a href="https://discord.gg/VzgfqFY8zr" target="_blank">
+            <button>ENTRAR NO DISCORD</button>
+        </a>
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- APRESENTAÇÃO DO CLÃ -->
+<!-- Bloco “O que é o BPBR?” -->
+<!-- ========================================================= -->
+
+<section id="apresentacao" class="apresentacao-section">
+    <div class="apresentacao-card">
+        <p class="subtitulo">( CONHEÇA O BPBR )</p>
+        <h2>⚔️ O QUE É O BPBR?</h2>
+
+        <p class="apresentacao-texto">
+            O <strong>Batalhão Paraquedista Brasileiro (BPBR)</strong>
+            é uma comunidade de Battlefield 1 focada em organização,
+            respeito e trabalho em equipe. Nosso objetivo é reunir jogadores
+            que gostam de partidas organizadas, pelotões fechados e operações
+            épicas nos campos de batalha.
+        </p>
+
+        <div class="vantagens-grid">
+            <div class="vantagem-card">
+                <span>🎖️</span>
+                <h3>Pelotão Organizado</h3>
+                <p>Jogue com esquadrões fechados e estratégia real.</p>
+            </div>
+
+            <div class="vantagem-card">
+                <span>🔥</span>
+                <h3>Operações e Eventos</h3>
+                <p>Partidas organizadas e eventos internos.</p>
+            </div>
+
+            <div class="vantagem-card">
+                <span>🎙️</span>
+                <h3>Comunicação Ativa</h3>
+                <p>Coordenação total através do Discord.</p>
+            </div>
+
+            <div class="vantagem-card">
+                <span>🛡️</span>
+                <h3>Staff Organizada</h3>
+                <p>Administração ativa e suporte constante.</p>
+            </div>
+        </div>
+
+        <div class="apresentacao-botoes">
+            <!-- TROCAR LINK DO DISCORD AQUI -->
+            <a href="https://discord.gg/VzgfqFY8zr" target="_blank">
+                <button>ENTRAR NO DISCORD</button>
+            </a>
+
+            <a href="#alistamento">
+                <button class="btn-secundario">ALISTAR-SE</button>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- SERVIDORES -->
+<!-- Imagem inicial do servidor: fundo.jpg -->
+<!-- A contagem vem pelo script.js -->
+<!-- ========================================================= -->
+
+<section id="servidores" class="secao">
+    <p class="subtitulo">( NOSSOS CAMPOS DE BATALHA )</p>
+    <h2 id="servidores-titulo">Servidores <span>Ativos</span></h2>
+    <p id="servidores-sub">Status em tempo real do Battlefield 1</p>
+
+    <div class="server-card server-card-premium">
+
+        <!-- IMAGEM DO MAPA / SERVIDOR -->
+        <div class="server-img-box">
+            <img id="server-image" src="fundo.jpg" alt="Imagem do servidor">
+        </div>
+
+        <div class="server-content">
+
+            <!-- NOME DO SERVIDOR -->
+            <div class="server-topo">
+                <h3 id="server-title">
+                    <span id="server-name">Carregando servidor...</span>
+                </h3>
+            </div>
+
+            <!-- STATUS ONLINE -->
+            <div class="server-status-linha">
+                <span class="server-status-dot"></span>
+                <strong id="status-online">ONLINE</strong>
+            </div>
+
+            <!-- BARRA DE OCUPAÇÃO -->
+            <div class="server-barra">
+                <div id="server-barra-fill"></div>
+            </div>
+
+            <!-- INFORMAÇÕES DO SERVIDOR -->
+            <div class="server-info server-info-premium">
+
+                <p class="server-stat">
+                    <b id="players-label">Players</b>
+                    <span id="players">--</span>
+                </p>
+
+                <p class="server-stat">
+                    <b id="fila-label">Fila</b>
+                    <span id="queue">--</span>
+                </p>
+
+                <p class="server-stat">
+                    <b id="mapa-label">Mapa</b>
+                    <span id="map">--</span>
+                </p>
+
+                <p class="server-stat">
+                    <b id="modo-label">Modo</b>
+                    <span id="mode">--</span>
+                </p>
+
+            </div>
+
+            <!-- TROCAR LINK DO SERVIDOR AQUI -->
+            <a href="https://joinme.click/" target="_blank">
+                <button id="entrar-servidor-btn" class="server-btn">ENTRAR NO SERVIDOR</button>
+            </a>
+
+        </div>
+    </div>
+</section>
+<!-- ========================================================= -->
+<!-- EVENTOS BPBR -->
+<!-- Para trocar o evento, edite o título, data, horário e imagem abaixo -->
+<!-- Imagem do evento: img/evento-bpbr.png -->
+<!-- ========================================================= -->
+
+<section id="eventos" class="secao eventos-section">
+    <p class="subtitulo">( AGENDA DO BATALHÃO )</p>
+    <h2>Próximo <span>Evento</span></h2>
+    <p>Participe das operações organizadas do BPBR</p>
+
+    <div class="evento-card">
+
+        <!-- IMAGEM DO EVENTO -->
+        <!-- TROCAR IMAGEM DO EVENTO AQUI -->
+        <div class="evento-imagem">
+            <img src="img/evento-bpbr.png" alt="Evento BPBR">
+        </div>
+
+        <!-- INFORMAÇÕES DO EVENTO -->
+        <div class="evento-conteudo">
+            <span id="evento-tag" class="evento-tag">📅 EVENTO DA SEMANA</span>
+
+            <!-- TROCAR NOME DO EVENTO AQUI -->
+            <h3 id="evento-titulo">EM BREVE</h3>
+
+            <!-- TROCAR DESCRIÇÃO DO EVENTO AQUI -->
+            <p id="evento-descricao">
+                Reúna seu pelotão e participe de uma operação organizada
+                com foco em comunicação, estratégia e domínio do campo de batalha.
+            </p>
+
+            <div class="evento-detalhes">
+                <!-- TROCAR DATA/HORÁRIO/MAPA/MODO AQUI -->
+                <span id="evento-data">📆 EM BREVE</span>
+                <span id="evento-horario">🕘 EM BREVE</span>
+                <span id="evento-mapa">🗺️ EM BREVE</span>
+                <span id="evento-modo">🎮 EM BREVE</span>
+            </div>
+
+            <!-- TROCAR LINK DO DISCORD AQUI -->
+            <a href="https://discord.gg/VzgfqFY8zr" target="_blank">
+                <button id="evento-btn">PARTICIPAR DO EVENTO</button>
+            </a>
+        </div>
+
+    </div>
+</section>
+<!-- ========================================================= -->
+<!-- ÁREA VIP -->
+<!-- Trocar link da LivePix no botão APOIE AGORA -->
+<!-- ========================================================= -->
+
+<section id="vip" class="secao vip-section">
+    <h2>ÁREA VIP</h2>
+    <p id="vip-sub">Ajude o BPBR e tenha benefícios exclusivos</p>
+
+    <!-- AVISO DE MOEDA PARA INGLÊS/ESPANHOL -->
+    <p id="vip-aviso-moeda" class="aviso-moeda"></p>
+
+    <div class="vip-premium-card">
+   <div class="vip-selo">🎖️ RECOMENDADO</div>
+    <div class="vip-barra"></div>
+
+        <h3 id="vip-nome">SOLDADO VIP</h3>
+
+        <div class="vip-preco">
+            <span>R$</span>
+            <strong>10</strong>
+            <small>/mês</small>
+        </div>
+
+        <ul>
+            <li class="vip-beneficio">🛡️ Atendimento Prioritário</li>
+            <li class="vip-beneficio">💬 Cargo exclusivo no Discord</li>
+            <li class="vip-beneficio">🔒 Salas VIP</li>
+            <li class="vip-beneficio">🎮 VIP no Nosso Servidor</li>
+            <li class="vip-beneficio">⚡ Não Pegue Filas</li>
+            <li class="vip-beneficio">🎁 Sorteios Exclusivos</li>
+            <li class="vip-beneficio">💪 Apoio ao Servidor</li>
+        </ul>
+        <div class="vip-comparativo">
+    <div>
+        <h4 id="sem-vip">SEM VIP</h4>
+        <div class="sem-vip-list">
+            <p>❌ Fila comum</p>
+            <p>❌ Sem cargo exclusivo</p>
+            <p>❌ Sem prioridade</p>
+        </div>
+    </div>
+
+    <div>
+        <h4 id="com-vip">COM VIP</h4>
+        <div class="com-vip-list">
+            <p>✅ Fila VIP</p>
+            <p>✅ Cargo exclusivo</p>
+            <p>✅ Suporte prioritário</p>
+        </div>
+    </div>
+</div>
+
+        <!-- TROCAR LINK DA LIVEPIX AQUI -->
+        <a href="https://widget.livepix.gg/embed/d96b1692-883a-4941-a4e0-ec56e4cf4d7e" target="_blank">
+            <button id="vip-apoiar-btn" class="vip-button">APOIE AGORA</button>
+        </a>
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- SOBRE / LIDERANÇA -->
+<!-- Para trocar imagem grande: img/lideranca.png -->
+<!-- ========================================================= -->
+
+<section id="sobre" class="secao lideranca-section">
+    <div class="lideranca-container">
+
+        <div class="lideranca-card-grande">
+            <!-- TROCAR IMAGEM DA LIDERANÇA AQUI -->
+            <img src="./img/lideranca.png?v=999" alt="Liderança BPBR">
+
+            <div class="lideranca-conteudo">
+                <h2 id="home-titulo">Liderança de Campo</h2>
+
+                <p id="home-texto">
+                    O BPBR é uma comunidade organizada de Battlefield 1,
+                    focada em respeito, trabalho em equipe e domínio dos
+                    campos de batalha.
+                </p>
+
+                <ul class="home-lista">
+                    <li>→ Comunicação em tempo real</li>
+                    <li>→ Organização entre pelotões</li>
+                    <li>→ Apoio para novos jogadores</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="lideranca-cards">
+            <div class="lideranca-card">
+                <h3 id="comunidade-titulo">Comunidade Ativa</h3>
+                <p id="comunidade-texto">Servidor com organização, staff ativa e suporte via Discord.</p>
+
+                <!-- TROCAR LINK DO DISCORD AQUI -->
+                <a href="https://discord.gg/VzgfqFY8zr" target="_blank">
+                    <button>ENTRAR NO DISCORD</button>
+                </a>
+            </div>
+
+            <div class="lideranca-card">
+                <h3 id="pelotao-titulo">Pelotão Organizado</h3>
+                <p id="pelotao-texto">Jogadores unidos para operações, conquista e partidas estratégicas.</p>
+            </div>
+
+            <div class="lideranca-card">
+                <h3 id="eventos-titulo">Eventos e Sorteios</h3>
+                <p id="eventos-texto">Eventos internos, sorteios VIP e ações para movimentar a comunidade.</p>
+            </div>
+
+            <div class="lideranca-card destaque">
+                <h3 id="vip-titulo">Soldado VIP</h3>
+                <p id="vip-texto">Apoie o servidor e tenha benefícios exclusivos no BPBR.</p>
+
+                <a href="#vip">
+                    <button id="vip-btn">VER VIP</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="suporte-card">
+        <div>
+            <small id="suporte-titulo">DÚVIDAS OU SUPORTE?</small>
+            <h3 id="suporte-texto">Fale diretamente com nossa equipe.</h3>
+        </div>
+
+        <!-- TROCAR LINK DO DISCORD AQUI -->
+        <a href="https://discord.gg/VzgfqFY8zr" target="_blank">
+            <button id="suporte-btn">FALE COM A NOSSA EQUIPE</button>
+        </a>
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- ALISTAMENTO -->
+<!-- Texto e botão para entrar no clã -->
+<!-- ========================================================= -->
+
+<section id="alistamento" class="secao alistamento-section">
+    <div class="alistamento-card">
+        <p class="subtitulo">( JUNTE-SE AO BPBR )</p>
+        <h2 id="alistamento-titulo">ALISTAMENTO</h2>
+
+        <p id="alistamento-texto">
+            Aliste-se no Batalhão Paraquedista BPBR e jogue Battlefield 1
+            com uma comunidade organizada, ativa e focada em trabalho em equipe.
+        </p>
+
+        <ul class="alistamento-lista">
+            <li>→ Jogue com pelotão fechado</li>
+            <li>→ Participe de operações organizadas</li>
+            <li>→ Tenha apoio da comunidade</li>
+            <li>→ Entre em eventos e partidas com o clã</li>
+            <li>→ Fortaleça o BPBR nos campos de batalha</li>
+        </ul>
+
+        <p>
+            Clique no botão abaixo para entrar no nosso Discord e se inscrever no clã.
+        </p>
+
+        <!-- TROCAR LINK DO DISCORD AQUI -->
+        <a href="https://discord.gg/VzgfqFY8zr" target="_blank">
+            <button id="alistamento-btn">ALISTAR-SE AGORA</button>
+        </a>
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- EQUIPE / STAFF -->
+<!-- Para adicionar ADM novo: copie um bloco staff-card -->
+<!-- Imagens usadas:
+     img/bizonho.png
+     img/bizonhofundo.png
+     img/rezende.png
+     img/rezendefundo.png
+     img/logo-bpbr.png
+     img/discord.png
+-->
+<!-- ========================================================= -->
+
+<section id="equipe" class="secao equipe-section">
+    <p class="subtitulo">( COMANDO BPBR )</p>
+    <h2>NOSSA <span>EQUIPE</span></h2>
+    <p>Conheça a equipe que mantém o BPBR funcionando.</p>
+
+    <div class="staff-grid">
+
+        <!-- CARD 1 - Bisonho -->
+        <div class="staff-card">
+            <div class="staff-cover">
+                <img src="img/bizonhofundo.png" alt="Fundo SD Bizonho">
+            </div>
+
+            <div class="staff-avatar">
+                <img src="img/bizonho.png" alt="SD Bizonho">
+            </div>
+
+            <div class="staff-info">
+                <h3>SD Bizonh0</h3>
+                <p class="staff-cargo">FUNDADOR</p>
+                <p class="staff-patente">GENERAL</p>
+
+                <a href="https://discord.gg/VzgfqFY8zr" target="_blank" class="discord-btn">
+                    <img src="img/discord.png" alt="Discord">
+                </a>
+            </div>
+        </div>
+
+        <!-- CARD 2 - SGT bisonho -->
+        <div class="staff-card">
+            <div class="staff-cover">
+                <img src="img/fundoadm.png" alt="Fundo SGT Bisonho">
+            </div>
+
+            <div class="staff-avatar">
+                <img src="img/sgtbisonho.png" alt="Bisonho">
+            </div>
+
+            <div class="staff-info">
+                <h3>SGT_bisonho</h3>
+                <p class="staff-cargo">Fundador</p>
+                <p class="staff-patente">General</p>
+
+                <a href="https://discord.gg/VzgfqFY8zr" target="_blank" class="discord-btn">
+                    <img src="img/discord.png" alt="Discord">
+                </a>
+            </div>
+        </div>
+
+        <!-- CARD 3 - Rezende -->
+        <div class="staff-card">
+            <div class="staff-cover">
+                <img src="img/rezendefundo.png"" alt="Fundo Rezende">
+            </div>
+
+            <div class="staff-avatar">
+                <img src="img/rezende.png" alt="Rezende">
+            </div>
+
+            <div class="staff-info">
+                <h3>Rezende</h3>
+                <p class="staff-cargo">ADM/Desenvolvedor</p>
+                <p class="staff-patente">Coronel</p>
+
+                <a href="https://discord.gg/VzgfqFY8zr" target="_blank" class="discord-btn">
+                    <img src="img/discord.png" alt="Discord">
+                </a>
+            </div>
+        </div>
+
+        <!-- CARD 4 - ADM RESERVA -->
+        <div class="staff-card">
+            <div class="staff-cover">
+                <img src="img/fundoadm.png" alt="Fundo ADM Reserva">
+            </div>
+
+            <div class="staff-avatar">
+                <img src="img/logo-bpbr.png" alt="ADM em breve">
+            </div>
+
+            <div class="staff-info">
+                <h3>Em breve</h3>
+                <p class="staff-cargo">MODERADOR</p>
+                <p class="staff-patente">PATENTE</p>
+
+                <a href="https://discord.gg/VzgfqFY8zr" target="_blank" class="discord-btn">
+                    <img src="img/discord.png" alt="Discord">
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================================= -->
+<!-- RODAPÉ -->
+<!-- Para trocar logo do rodapé: img/logo-bpbr.png -->
+<!-- ========================================================= -->
+
+<footer>
+    <div class="footer-left">
+        <img src="img/logo-bpbr.png" class="footer-logo" alt="Logo BPBR">
+        <p>© 2026. BPBR - Battlefield 1.</p>
+    </div>
+
+    <div class="footer-links">
+        <a href="https://discord.gg/VzgfqFY8zr" target="_blank">DISCORD</a>
+        <a href="#inicio">INÍCIO</a>
+    </div>
+</footer>
+
+<!-- ========================================================= -->
+<!-- SCRIPT DO SITE -->
+<!-- Contagem do servidor + tradução + animação do fundo -->
+<!-- ========================================================= -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
