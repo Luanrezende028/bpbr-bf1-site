@@ -1,3 +1,4 @@
+
 html{
     scroll-behavior:smooth;
 }
@@ -2322,5 +2323,190 @@ button:hover{
 
     .equipe-section .staff-card{
         overflow:hidden !important;
+    }
+}
+/* =========================
+   AJUSTE MOBILE
+========================= */
+@media (max-width: 768px) {
+
+    /* Header menor no celular */
+    header {
+        padding: 10px 15px;
+    }
+
+    /* Logo menor */
+    .logo img {
+        width: 70px;
+    }
+
+    /* Nome BPBR menor */
+    .logo h1 {
+        font-size: 42px;
+    }
+
+    /* Bandeiras menores */
+    .language-selector img {
+        width: 70px;
+    }
+
+    /* Menu centralizado */
+    nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    /*CORREÇÃO DO PROBLEMA celular */
+    .hero,
+    .inicio,
+    #inicio {
+        padding-top: 60px !important;
+    }
+
+    /* Texto do banner */
+    .hero h1,
+    #inicio h1 {
+        font-size: 55px;
+        line-height: 1.0;
+    }
+
+    .hero p,
+    #inicio p {
+        font-size: 20px;
+    }
+
+    /* Botão menor */
+    .hero-btn,
+    .discord-btn-home {
+        width: 90%;
+        font-size: 18px;
+    }
+}
+/* =========================
+   MENU HAMBÚRGUER MOBILE
+========================= */
+
+.menu-mobile-btn {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .menu-mobile-btn {
+        display: block !important;
+        background: linear-gradient(135deg, #ffd700, #ffae00);
+        color: #000;
+        border: none;
+        border-radius: 999px;
+        padding: 11px 22px;
+        font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        cursor: pointer;
+        box-shadow: 0 0 18px rgba(255, 215, 0, .45);
+        margin: 5px auto 0;
+    }
+
+    .menu {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    .menu a {
+        display: none !important;
+    }
+
+    .menu.menu-aberto a {
+        display: block !important;
+        width: 220px;
+        text-align: center;
+        padding: 11px 14px !important;
+        border-radius: 12px !important;
+        background: rgba(255, 255, 255, .06) !important;
+        border: 1px solid rgba(255, 215, 0, .25) !important;
+    }
+}
+/* =========================
+   CORREÇÃO DESKTOP - HEADER NO TOPO
+========================= */
+@media (min-width: 769px) {
+
+    header {
+        position: relative !important;
+        top: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        width: 100% !important;
+        z-index: 1000 !important;
+    }
+
+    .menu-mobile-btn {
+        display: none !important;
+    }
+
+    .menu {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .menu a {
+        display: inline-block !important;
+    }
+
+    #inicio {
+        margin-top: 0 !important;
+        padding-top: 120px !important;
+    }
+}
+.staff-avatar {
+    overflow: hidden;
+}
+
+.staff-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.staff-avatar img.avatar-sgt-bisonho {
+    object-position: center 42%;
+    transform: scale(1.08);
+}
+/* =========================
+   CORREÇÃO FINAL MENU MOBILE
+========================= */
+
+@media (max-width: 768px) {
+    header nav.menu {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    header nav.menu .menu-mobile-btn {
+        display: block !important;
+    }
+
+    header nav.menu > a {
+        display: none !important;
+    }
+
+    header nav.menu.menu-aberto > a {
+        display: block !important;
+        width: 220px !important;
+        text-align: center !important;
+        padding: 11px 14px !important;
+        border-radius: 12px !important;
+        background: rgba(255, 255, 255, .06) !important;
+        border: 1px solid rgba(255, 215, 0, .25) !important;
     }
 }
