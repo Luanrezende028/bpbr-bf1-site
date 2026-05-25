@@ -2328,42 +2328,60 @@ button:hover{
    AJUSTE MOBILE
 ========================= */
 
+/* =========================
+   HEADER MOBILE PREMIUM
+========================= */
 @media (max-width: 768px) {
 
     header {
         position: relative !important;
         height: auto !important;
-        padding: 18px 10px 22px !important;
+        padding: 16px 12px 18px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 14px !important;
+        background: rgba(0,0,0,.96) !important;
     }
 
     .logo {
+        display: flex !important;
+        align-items: center !important;
         justify-content: center !important;
-        gap: 14px !important;
-        margin-bottom: 20px !important;
+        gap: 10px !important;
+        margin: 0 !important;
     }
 
     .logo img {
-        width: 65px !important;
-        height: auto !important;
+        width: 46px !important;
+        height: 46px !important;
+        object-fit: contain !important;
     }
 
     .logo span,
     .logo h1 {
-        font-size: 42px !important;
+        font-size: 34px !important;
+        letter-spacing: 3px !important;
+        margin: 0 !important;
+        line-height: 1 !important;
     }
 
     .idiomas,
     .language-selector {
+        display: flex !important;
         justify-content: center !important;
-        margin: 0 auto 18px !important;
-        gap: 14px !important;
+        align-items: center !important;
+        gap: 10px !important;
+        margin: 0 !important;
     }
 
     .flag,
     .idiomas img,
     .language-selector img {
-        width: 82px !important;
-        height: auto !important;
+        width: 58px !important;
+        height: 36px !important;
+        object-fit: cover !important;
+        border-radius: 50px !important;
     }
 
     .menu,
@@ -2371,37 +2389,43 @@ button:hover{
         display: flex !important;
         flex-wrap: wrap !important;
         justify-content: center !important;
-        gap: 14px 22px !important;
+        gap: 8px !important;
         padding: 0 !important;
         margin: 0 !important;
+        max-width: 360px !important;
     }
 
     .menu a,
     nav ul li a {
-        font-size: 16px !important;
+        font-size: 12px !important;
+        padding: 7px 10px !important;
+        border: 1px solid rgba(255,215,0,.25) !important;
+        border-radius: 999px !important;
+        background: rgba(255,255,255,.04) !important;
+        text-decoration: none !important;
     }
 
     #inicio {
+        padding: 40px 14px 65px !important;
         min-height: auto !important;
-        padding: 35px 18px 70px !important;
-        margin-top: 0 !important;
     }
 
     #inicio h1 {
-        font-size: 46px !important;
-        line-height: 1.1 !important;
-        margin: 0 0 22px !important;
+        font-size: 38px !important;
+        line-height: 1.12 !important;
+        margin-bottom: 18px !important;
     }
 
     #inicio p {
-        font-size: 20px !important;
-        margin: 0 0 34px !important;
+        font-size: 18px !important;
+        margin-bottom: 28px !important;
     }
 
     #inicio button {
-        width: 90% !important;
-        max-width: 430px !important;
-        padding: 22px 15px !important;
-        font-size: 22px !important;
+        width: 88% !important;
+        max-width: 360px !important;
+        padding: 18px 12px !important;
+        font-size: 18px !important;
+        border-radius: 14px !important;
     }
 }
