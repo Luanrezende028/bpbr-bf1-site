@@ -2429,3 +2429,53 @@ button:hover{
         border-radius: 14px !important;
     }
 }
+/* =========================
+   ALISTAMENTO MOBILE COMPACTO
+========================= */
+@media (max-width: 768px) {
+
+    #alistamento {
+        padding: 45px 16px !important;
+    }
+
+    #alistamento .subtitulo {
+        font-size: 14px !important;
+        letter-spacing: 5px !important;
+        margin-bottom: 14px !important;
+    }
+
+    #alistamento-titulo {
+        font-size: 42px !important;
+        margin-bottom: 22px !important;
+        line-height: 1 !important;
+    }
+
+    #alistamento-texto {
+        font-size: 20px !important;
+        line-height: 1.45 !important;
+        margin-bottom: 28px !important;
+    }
+
+    .alistamento-lista {
+        gap: 10px !important;
+        margin: 25px 0 !important;
+    }
+
+    .alistamento-lista li {
+        font-size: 19px !important;
+        line-height: 1.25 !important;
+        padding: 14px 10px !important;
+    }
+
+    #alistamento p:last-of-type {
+        font-size: 18px !important;
+        line-height: 1.35 !important;
+        margin: 24px 0 !important;
+    }
+
+    #alistamento-btn {
+        width: 90% !important;
+        padding: 17px 12px !important;
+        font-size: 17px !important;
+    }
+}
