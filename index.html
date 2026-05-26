@@ -15,52 +15,40 @@
 
 <!-- ========================================================= -->
 <!-- CABEÇALHO / LOGO / BANDEIRAS / MENU -->
-<!-- Para trocar a logo: img/logo-bpbr.png -->
 <!-- ========================================================= -->
 
 <header>
 
-    <!-- LOGO DO BPBR -->
     <div class="logo">
         <img src="img/logo-bpbr.png" alt="Logo BPBR">
         <span>BPBR</span>
     </div>
 
-    <!-- ========================================================= -->
-    <!-- BANDEIRAS DE IDIOMA -->
-    <!-- Para trocar bandeiras: img/br.png | img/us.png | img/ar.png -->
-    <!-- ========================================================= -->
     <div class="idiomas">
         <button class="flag br" onclick="trocarIdioma('pt')" title="Português"></button>
         <button class="flag us" onclick="trocarIdioma('en')" title="English"></button>
         <button class="flag ar" onclick="trocarIdioma('es')" title="Español"></button>
     </div>
 
-    <!-- ========================================================= -->
-    <!-- MENU DO SITE -->
-    <!-- ========================================================= -->
-
     <nav class="menu">
+        <button type="button" id="btn-menu-mobile" class="menu-mobile-btn" onclick="toggleMenuMobile()">
+            ☰ MENU
+        </button>
 
-    <button type="button" id="btn-menu-mobile" class="menu-mobile-btn" onclick="toggleMenuMobile()">
-        ☰ MENU
-    </button>
+        <a href="#inicio">INÍCIO</a>
+        <a href="#servidores">SERVIDORES</a>
+        <a href="#eventos">EVENTOS</a>
+        <a href="#vip">VIP</a>
+        <a href="#sobre">SOBRE</a>
+        <a href="#alistamento">ALISTAMENTO</a>
+        <a href="#equipe">EQUIPE</a>
+        <a href="galeria.html">GALERIA</a>
+    </nav>
 
-    <a href="#inicio">INÍCIO</a>
-    <a href="#servidores">SERVIDORES</a>
-    <a href="#eventos">EVENTOS</a>
-    <a href="#vip">VIP</a>
-    <a href="#sobre">SOBRE</a>
-    <a href="#alistamento">ALISTAMENTO</a>
-    <a href="#equipe">EQUIPE</a>
-    <a href="galeria.html">GALERIA</a>
-
-</nav>
 </header>
 
 <!-- ========================================================= -->
 <!-- INÍCIO / BANNER PRINCIPAL -->
-<!-- Link do Discord principal abaixo -->
 <!-- ========================================================= -->
 
 <section id="inicio" class="secao hero">
@@ -68,7 +56,6 @@
         <h1>BATALHÃO PARAQUEDISTA</h1>
         <p>Comunidade Oficial Battlefield 1</p>
 
-        <!-- TROCAR LINK DO DISCORD AQUI -->
         <a href="https://discord.gg/VzgfqFY8zr" target="_blank">
             <button>ENTRAR NO DISCORD</button>
         </a>
@@ -77,7 +64,6 @@
 
 <!-- ========================================================= -->
 <!-- APRESENTAÇÃO DO CLÃ -->
-<!-- Bloco “O que é o BPBR?” -->
 <!-- ========================================================= -->
 
 <section id="apresentacao" class="apresentacao-section">
@@ -120,7 +106,6 @@
         </div>
 
         <div class="apresentacao-botoes">
-            <!-- TROCAR LINK DO DISCORD AQUI -->
             <a href="https://discord.gg/VzgfqFY8zr" target="_blank">
                 <button>ENTRAR NO DISCORD</button>
             </a>
@@ -134,8 +119,6 @@
 
 <!-- ========================================================= -->
 <!-- SERVIDORES -->
-<!-- Imagem inicial do servidor: fundo.jpg -->
-<!-- A contagem vem pelo script.js -->
 <!-- ========================================================= -->
 
 <section id="servidores" class="secao">
@@ -144,35 +127,27 @@
     <p id="servidores-sub">Status em tempo real do Battlefield 1</p>
 
     <div class="server-card server-card-premium">
-
-        <!-- IMAGEM DO MAPA / SERVIDOR -->
         <div class="server-img-box">
             <img id="server-image" src="fundo.jpg" alt="Imagem do servidor">
         </div>
 
         <div class="server-content">
-
-            <!-- NOME DO SERVIDOR -->
             <div class="server-topo">
                 <h3 id="server-title">
                     <span id="server-name">Carregando servidor...</span>
                 </h3>
             </div>
 
-            <!-- STATUS ONLINE -->
             <div class="server-status-linha">
                 <span class="server-status-dot"></span>
                 <strong id="status-online">ONLINE</strong>
             </div>
 
-            <!-- BARRA DE OCUPAÇÃO -->
             <div class="server-barra">
                 <div id="server-barra-fill"></div>
             </div>
 
-            <!-- INFORMAÇÕES DO SERVIDOR -->
             <div class="server-info server-info-premium">
-
                 <p class="server-stat">
                     <b id="players-label">Players</b>
                     <span id="players">--</span>
@@ -192,22 +167,17 @@
                     <b id="modo-label">Modo</b>
                     <span id="mode">--</span>
                 </p>
-
             </div>
 
-            <!-- TROCAR LINK DO SERVIDOR AQUI -->
             <a href="https://joinme.click/" target="_blank">
                 <button id="entrar-servidor-btn" class="server-btn">ENTRAR NO SERVIDOR</button>
             </a>
-
         </div>
     </div>
 </section>
 
 <!-- ========================================================= -->
 <!-- EVENTOS BPBR -->
-<!-- Para trocar o evento, edite o título, data, horário e imagem abaixo -->
-<!-- Imagem do evento: img/evento-bpbr.png -->
 <!-- ========================================================= -->
 
 <section id="eventos" class="secao eventos-section">
@@ -216,53 +186,40 @@
     <p>Participe das operações organizadas do BPBR</p>
 
     <div class="evento-card">
-
-        <!-- IMAGEM DO EVENTO -->
-        <!-- TROCAR IMAGEM DO EVENTO AQUI -->
         <div class="evento-imagem">
             <img src="img/evento-bpbr.png" alt="Evento BPBR">
         </div>
 
-        <!-- INFORMAÇÕES DO EVENTO -->
         <div class="evento-conteudo">
             <span id="evento-tag" class="evento-tag">📅 EVENTO DA SEMANA</span>
-
-            <!-- TROCAR NOME DO EVENTO AQUI -->
             <h3 id="evento-titulo">EM BREVE</h3>
 
-            <!-- TROCAR DESCRIÇÃO DO EVENTO AQUI -->
             <p id="evento-descricao">
                 Reúna seu pelotão e participe de uma operação organizada
                 com foco em comunicação, estratégia e domínio do campo de batalha.
             </p>
 
             <div class="evento-detalhes">
-                <!-- TROCAR DATA/HORÁRIO/MAPA/MODO AQUI -->
                 <span id="evento-data">📆 EM BREVE</span>
                 <span id="evento-horario">🕘 EM BREVE</span>
                 <span id="evento-mapa">🗺️ EM BREVE</span>
                 <span id="evento-modo">🎮 EM BREVE</span>
             </div>
 
-            <!-- TROCAR LINK DO DISCORD AQUI -->
             <a href="https://discord.gg/VzgfqFY8zr" target="_blank">
                 <button id="evento-btn">PARTICIPAR DO EVENTO</button>
             </a>
         </div>
-
     </div>
 </section>
 
 <!-- ========================================================= -->
 <!-- ÁREA VIP -->
-<!-- Trocar link da LivePix no botão APOIE AGORA -->
 <!-- ========================================================= -->
 
 <section id="vip" class="secao vip-section">
     <h2>ÁREA VIP</h2>
     <p id="vip-sub">Ajude o BPBR e tenha benefícios exclusivos</p>
-
-    <!-- AVISO DE MOEDA PARA INGLÊS/ESPANHOL -->
     <p id="vip-aviso-moeda" class="aviso-moeda"></p>
 
     <div class="vip-premium-card">
@@ -307,7 +264,6 @@
             </div>
         </div>
 
-        <!-- TROCAR LINK DA LIVEPIX AQUI -->
         <a href="https://widget.livepix.gg/embed/d96b1692-883a-4941-a4e0-ec56e4cf4d7e" target="_blank">
             <button id="vip-apoiar-btn" class="vip-button">APOIE AGORA</button>
         </a>
@@ -316,14 +272,11 @@
 
 <!-- ========================================================= -->
 <!-- SOBRE / LIDERANÇA -->
-<!-- Para trocar imagem grande: img/lideranca.png -->
 <!-- ========================================================= -->
 
 <section id="sobre" class="secao lideranca-section">
     <div class="lideranca-container">
-
         <div class="lideranca-card-grande">
-            <!-- TROCAR IMAGEM DA LIDERANÇA AQUI -->
             <img src="./img/lideranca.png?v=999" alt="Liderança BPBR">
 
             <div class="lideranca-conteudo">
@@ -348,7 +301,6 @@
                 <h3 id="comunidade-titulo">Comunidade Ativa</h3>
                 <p id="comunidade-texto">Servidor com organização, staff ativa e suporte via Discord.</p>
 
-                <!-- TROCAR LINK DO DISCORD AQUI -->
                 <a href="https://discord.gg/VzgfqFY8zr" target="_blank">
                     <button>ENTRAR NO DISCORD</button>
                 </a>
@@ -381,7 +333,6 @@
             <h3 id="suporte-texto">Fale diretamente com nossa equipe.</h3>
         </div>
 
-        <!-- TROCAR LINK DO DISCORD AQUI -->
         <a href="https://discord.gg/VzgfqFY8zr" target="_blank">
             <button id="suporte-btn">FALE COM A NOSSA EQUIPE</button>
         </a>
@@ -390,7 +341,6 @@
 
 <!-- ========================================================= -->
 <!-- ALISTAMENTO -->
-<!-- Texto e botão para entrar no clã -->
 <!-- ========================================================= -->
 
 <section id="alistamento" class="secao alistamento-section">
@@ -411,11 +361,8 @@
             <li>→ Fortaleça o BPBR nos campos de batalha</li>
         </ul>
 
-        <p>
-            Clique no botão abaixo para entrar no nosso Discord e se inscrever no clã.
-        </p>
+        <p>Clique no botão abaixo para entrar no nosso Discord e se inscrever no clã.</p>
 
-        <!-- TROCAR LINK DO DISCORD AQUI -->
         <a href="https://discord.gg/VzgfqFY8zr" target="_blank">
             <button id="alistamento-btn">ALISTAR-SE AGORA</button>
         </a>
@@ -424,8 +371,8 @@
 
 <!-- ========================================================= -->
 <!-- EQUIPE / STAFF -->
-<!-- Para adicionar ADM novo: copie um bloco staff-card -->
 <!-- ========================================================= -->
+
 <section id="equipe" class="secao equipe-section">
     <p class="subtitulo">( COMANDO BPBR )</p>
     <h2>NOSSA <span>EQUIPE</span></h2>
@@ -518,7 +465,6 @@
 
 <!-- ========================================================= -->
 <!-- RODAPÉ -->
-<!-- Para trocar logo do rodapé: img/logo-bpbr.png -->
 <!-- ========================================================= -->
 
 <footer>
@@ -533,14 +479,7 @@
     </div>
 </footer>
 
-<!-- ========================================================= -->
-<!-- SCRIPT DO SITE -->
-<!-- Contagem do servidor + tradução + animação do fundo -->
-<!-- ========================================================= -->
-
 <script src="script.js"></script>
 
 </body>
 </html>
-```
-
