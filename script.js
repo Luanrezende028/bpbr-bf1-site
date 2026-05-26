@@ -1,2673 +1,460 @@
+// =====================================================
+// SCRIPT BPBR
+// Desenvolvido por Rezende
+// =====================================================
 
-html{
-    scroll-behavior:smooth;
-}
+// =====================================================
+// EVENTO DA SEMANA - EDITE SÓ AQUI
+// =====================================================
 
-:root{
-    --mouse-x:0px;
-    --mouse-y:0px;
-}
+const EVENTO_SEMANA = {
+    pt: {
+        tag: "📅 EVENTO DA SEMANA",
+        titulo: "EM BREVE",
+        descricao: "Reúna seu pelotão e participe de uma operação organizada com foco em comunicação, estratégia e domínio do campo de batalha.",
+        data: "📆 EM BREVE",
+        horario: "🕘 EM BREVE",
+        mapa: "🗺️ EM BREVE",
+        modo: "🎮 EM BREVE",
+        botao: "PARTICIPAR DO EVENTO"
+    },
 
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    color:white;
-    background:#050505;
-    overflow-x:hidden;
-}
+    en: {
+        tag: "📅 EVENT OF THE WEEK",
+        titulo: "COMING SOON",
+        descricao: "Gather your squad and join an organized operation focused on communication, strategy and battlefield control.",
+        data: "📆 COMING SOON",
+        horario: "🕘 COMING SOON",
+        mapa: "🗺️ COMING SOON",
+        modo: "🎮 COMING SOON",
+        botao: "JOIN EVENT"
+    },
 
-/* FUNDO COM ANIMAÇÃO */
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background-image:url("fundo.jpg");
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    z-index:-2;
-
-    transform:
-        translate(var(--mouse-x, 0px), var(--mouse-y, 0px))
-        scale(1.08);
-
-    animation:
-        zoomFundo 15s infinite alternate ease-in-out;
-
-    transition:transform .15s ease-out;
-}
-
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-
-    background:linear-gradient(
-        rgba(0,0,0,.35),
-        rgba(0,0,0,.55)
-    );
-
-    z-index:-1;
-    pointer-events:none;
-}
-
-@keyframes zoomFundo{
-    from{
-        background-size:105%;
+    es: {
+        tag: "📅 EVENTO DE LA SEMANA",
+        titulo: "PRÓXIMAMENTE",
+        descricao: "Reúne a tu pelotón y participa en una operación organizada con enfoque en comunicación, estrategia y dominio del campo de batalla.",
+        data: "📆 PRÓXIMAMENTE",
+        horario: "🕘 PRÓXIMAMENTE",
+        mapa: "🗺️ PRÓXIMAMENTE",
+        modo: "🎮 PRÓXIMAMENTE",
+        botao: "PARTICIPAR DEL EVENTO"
     }
+};
 
-    to{
-        background-size:112%;
+// =====================================================
+// TRADUÇÕES
+// =====================================================
+
+const TRADUCOES = {
+    pt: {
+        menu: ["INÍCIO", "SERVIDORES", "EVENTOS", "VIP", "SOBRE", "ALISTAMENTO", "EQUIPE", "GALERIA"],
+
+        inicioTitulo: "BATALHÃO PARAQUEDISTA",
+        inicioSub: "Comunidade Oficial Battlefield 1",
+        inicioBtn: "ENTRAR NO DISCORD",
+
+        apresentacaoMini: "( CONHEÇA O BPBR )",
+        apresentacaoTitulo: "⚔️ O QUE É O BPBR?",
+        apresentacaoTexto: "O Batalhão Paraquedista Brasileiro (BPBR) é uma comunidade de Battlefield 1 focada em organização, respeito e trabalho em equipe. Nosso objetivo é reunir jogadores que gostam de partidas organizadas, pelotões fechados e operações épicas nos campos de batalha.",
+        apresentacaoCardsTitulo: ["Pelotão Organizado", "Operações e Eventos", "Comunicação Ativa", "Staff Organizada"],
+        apresentacaoCardsTexto: ["Jogue com esquadrões fechados e estratégia real.", "Partidas organizadas e eventos internos.", "Coordenação total através do Discord.", "Administração ativa e suporte constante."],
+        apresentacaoBotoes: ["ENTRAR NO DISCORD", "ALISTAR-SE"],
+
+        servidoresMini: "( NOSSOS CAMPOS DE BATALHA )",
+        servidoresTitulo: "Servidores <span>Ativos</span>",
+        servidoresSub: "Status em tempo real do Battlefield 1",
+        servidorLabels: ["Players", "Fila", "Mapa", "Modo"],
+        servidorOnline: "ONLINE",
+        servidorBtn: "ENTRAR NO SERVIDOR",
+
+        eventosMini: "( AGENDA DO BATALHÃO )",
+        eventosTitulo: "Próximo <span>Evento</span>",
+        eventosSub: "Participe das operações organizadas do BPBR",
+
+        vipTitulo: "ÁREA VIP",
+        vipSub: "Ajude o BPBR e tenha benefícios exclusivos",
+        vipSelo: "🎖️ RECOMENDADO",
+        vipNome: "SOLDADO VIP",
+        vipBeneficios: ["🛡️ Atendimento Prioritário", "💬 Cargo exclusivo no Discord", "🔒 Salas VIP", "🎮 VIP no Nosso Servidor", "⚡ Não Pegue Filas", "🎁 Sorteios Exclusivos", "💪 Apoio ao Servidor"],
+        vipComparativoTitulos: ["SEM VIP", "COM VIP"],
+        vipComparativoTextos: ["❌ Fila comum", "❌ Sem cargo exclusivo", "❌ Sem prioridade", "✅ Fila VIP", "✅ Cargo exclusivo", "✅ Suporte prioritário"],
+        vipBtn: "APOIE AGORA",
+
+        sobreTitulo: "Liderança de Campo",
+        sobreTexto: "O BPBR é uma comunidade organizada de Battlefield 1, focada em respeito, trabalho em equipe e domínio dos campos de batalha.",
+        sobreLista: ["→ Comunicação em tempo real", "→ Organização entre pelotões", "→ Apoio para novos jogadores"],
+
+        liderancaCardsTitulo: ["Comunidade Ativa", "Pelotão Organizado", "Eventos e Sorteios", "Soldado VIP"],
+        liderancaCardsTexto: [
+            "Servidor com organização, staff ativa e suporte via Discord.",
+            "Jogadores unidos para operações, conquista e partidas estratégicas.",
+            "Eventos internos, sorteios VIP e ações para movimentar a comunidade.",
+            "Apoie o servidor e tenha benefícios exclusivos no BPBR."
+        ],
+
+        suporteMini: "DÚVIDAS OU SUPORTE?",
+        suporteTexto: "Fale diretamente com nossa equipe.",
+        suporteBtn: "FALE COM A NOSSA EQUIPE",
+
+        alistamentoMini: "( JUNTE-SE AO BPBR )",
+        alistamentoTitulo: "ALISTAMENTO",
+        alistamentoTexto: "Aliste-se no Batalhão Paraquedista BPBR e jogue Battlefield 1 com uma comunidade organizada, ativa e focada em trabalho em equipe.",
+        alistamentoLista: ["→ Jogue com pelotão fechado", "→ Participe de operações organizadas", "→ Tenha apoio da comunidade", "→ Entre em eventos e partidas com o clã", "→ Fortaleça o BPBR nos campos de batalha"],
+        alistamentoBtn: "ALISTAR-SE AGORA",
+
+        equipeMini: "( COMANDO BPBR )",
+        equipeTitulo: "NOSSA <span>EQUIPE</span>",
+        equipeSub: "Conheça a equipe que mantém o BPBR funcionando.",
+        equipeCargos: ["FUNDADOR", "GENERAL", "FUNDADOR", "GENERAL", "ADM / DESENVOLVEDOR", "CORONEL", "MODERADOR", "PATENTE"]
+    },
+
+    en: {
+        menu: ["HOME", "SERVERS", "EVENTS", "VIP", "ABOUT", "ENLISTMENT", "TEAM", "GALLERY"],
+
+        inicioTitulo: "PARATROOPER BATTALION",
+        inicioSub: "Official Battlefield 1 Community",
+        inicioBtn: "JOIN DISCORD",
+
+        apresentacaoMini: "( MEET BPBR )",
+        apresentacaoTitulo: "⚔️ WHAT IS BPBR?",
+        apresentacaoTexto: "The Brazilian Paratrooper Battalion (BPBR) is a Battlefield 1 community focused on organization, respect and teamwork. Our goal is to gather players who enjoy organized matches, closed squads and epic operations on the battlefield.",
+        apresentacaoCardsTitulo: ["Organized Squad", "Operations and Events", "Active Communication", "Organized Staff"],
+        apresentacaoCardsTexto: ["Play with closed squads and real strategy.", "Organized matches and internal events.", "Full coordination through Discord.", "Active administration and constant support."],
+        apresentacaoBotoes: ["JOIN DISCORD", "ENLIST"],
+
+        servidoresMini: "( OUR BATTLEFIELDS )",
+        servidoresTitulo: "Active <span>Servers</span>",
+        servidoresSub: "Real-time Battlefield 1 server status",
+        servidorLabels: ["Players", "Queue", "Map", "Mode"],
+        servidorOnline: "ONLINE",
+        servidorBtn: "JOIN SERVER",
+
+        eventosMini: "( BATTALION AGENDA )",
+        eventosTitulo: "Next <span>Event</span>",
+        eventosSub: "Join BPBR organized operations",
+
+        vipTitulo: "VIP AREA",
+        vipSub: "Support BPBR and get exclusive benefits",
+        vipSelo: "🎖️ RECOMMENDED",
+        vipNome: "VIP SOLDIER",
+        vipBeneficios: ["🛡️ Priority Support", "💬 Exclusive Discord Role", "🔒 VIP Rooms", "🎮 VIP on Our Server", "⚡ Skip Queue", "🎁 Exclusive Giveaways", "💪 Support the Server"],
+        vipComparativoTitulos: ["WITHOUT VIP", "WITH VIP"],
+        vipComparativoTextos: ["❌ Regular queue", "❌ No exclusive role", "❌ No priority", "✅ VIP queue", "✅ Exclusive role", "✅ Priority support"],
+        vipBtn: "SUPPORT NOW",
+
+        sobreTitulo: "Field Leadership",
+        sobreTexto: "BPBR is an organized Battlefield 1 community focused on respect, teamwork and battlefield dominance.",
+        sobreLista: ["→ Real-time communication", "→ Squad organization", "→ Support for new players"],
+
+        liderancaCardsTitulo: ["Active Community", "Organized Squad", "Events & Giveaways", "VIP Soldier"],
+        liderancaCardsTexto: [
+            "Server with organization, active staff and Discord support.",
+            "Players united for operations, conquest and strategic matches.",
+            "Internal events, VIP giveaways and community actions.",
+            "Support the server and get exclusive benefits in BPBR."
+        ],
+
+        suporteMini: "QUESTIONS OR SUPPORT?",
+        suporteTexto: "Talk directly with our team.",
+        suporteBtn: "CONTACT OUR TEAM",
+
+        alistamentoMini: "( JOIN BPBR )",
+        alistamentoTitulo: "ENLISTMENT",
+        alistamentoTexto: "Join the BPBR Paratrooper Battalion and play Battlefield 1 with an organized, active and teamwork-focused community.",
+        alistamentoLista: ["→ Play with a closed squad", "→ Join organized operations", "→ Get community support", "→ Join clan events and matches", "→ Strengthen BPBR on the battlefield"],
+        alistamentoBtn: "ENLIST NOW",
+
+        equipeMini: "( BPBR COMMAND )",
+        equipeTitulo: "OUR <span>TEAM</span>",
+        equipeSub: "Meet the team that keeps BPBR running.",
+        equipeCargos: ["FOUNDER", "GENERAL", "FOUNDER", "GENERAL", "ADMIN / DEVELOPER", "COLONEL", "MODERATOR", "RANK"]
+    },
+
+    es: {
+        menu: ["INICIO", "SERVIDORES", "EVENTOS", "VIP", "SOBRE", "ALISTAMIENTO", "EQUIPO", "GALERÍA"],
+
+        inicioTitulo: "BATALLÓN PARACAIDISTA",
+        inicioSub: "Comunidad Oficial Battlefield 1",
+        inicioBtn: "ENTRAR AL DISCORD",
+
+        apresentacaoMini: "( CONOCE BPBR )",
+        apresentacaoTitulo: "⚔️ ¿QUÉ ES BPBR?",
+        apresentacaoTexto: "El Batallón Paracaidista Brasileño (BPBR) es una comunidad de Battlefield 1 enfocada en organización, respeto y trabajo en equipo. Nuestro objetivo es reunir jugadores que disfrutan partidas organizadas, pelotones cerrados y operaciones épicas en el campo de batalla.",
+        apresentacaoCardsTitulo: ["Pelotón Organizado", "Operaciones y Eventos", "Comunicación Activa", "Staff Organizado"],
+        apresentacaoCardsTexto: ["Juega con escuadrones cerrados y estrategia real.", "Partidas organizadas y eventos internos.", "Coordinación total por Discord.", "Administración activa y soporte constante."],
+        apresentacaoBotoes: ["ENTRAR AL DISCORD", "ALISTARSE"],
+
+        servidoresMini: "( NUESTROS CAMPOS DE BATALLA )",
+        servidoresTitulo: "Servidores <span>Activos</span>",
+        servidoresSub: "Estado del servidor Battlefield 1 en tiempo real",
+        servidorLabels: ["Jugadores", "Cola", "Mapa", "Modo"],
+        servidorOnline: "ONLINE",
+        servidorBtn: "ENTRAR AL SERVIDOR",
+
+        eventosMini: "( AGENDA DEL BATALLÓN )",
+        eventosTitulo: "Próximo <span>Evento</span>",
+        eventosSub: "Participa en las operaciones organizadas del BPBR",
+
+        vipTitulo: "ÁREA VIP",
+        vipSub: "Apoya al BPBR y obtén beneficios exclusivos",
+        vipSelo: "🎖️ RECOMENDADO",
+        vipNome: "SOLDADO VIP",
+        vipBeneficios: ["🛡️ Atención Prioritaria", "💬 Rol exclusivo en Discord", "🔒 Salas VIP", "🎮 VIP en Nuestro Servidor", "⚡ Sin Cola", "🎁 Sorteos Exclusivos", "💪 Apoyo al Servidor"],
+        vipComparativoTitulos: ["SIN VIP", "CON VIP"],
+        vipComparativoTextos: ["❌ Cola normal", "❌ Sin rol exclusivo", "❌ Sin prioridad", "✅ Cola VIP", "✅ Rol exclusivo", "✅ Soporte prioritario"],
+        vipBtn: "APOYAR AHORA",
+
+        sobreTitulo: "Liderazgo de Campo",
+        sobreTexto: "BPBR es una comunidad organizada de Battlefield 1 enfocada en respeto, trabajo en equipo y dominio del campo de batalla.",
+        sobreLista: ["→ Comunicación en tiempo real", "→ Organización entre pelotones", "→ Apoyo para nuevos jugadores"],
+
+        liderancaCardsTitulo: ["Comunidad Activa", "Pelotón Organizado", "Eventos y Sorteos", "Soldado VIP"],
+        liderancaCardsTexto: [
+            "Servidor con organización, staff activa y soporte por Discord.",
+            "Jugadores unidos para operaciones, conquista y partidas estratégicas.",
+            "Eventos internos, sorteos VIP y acciones para la comunidad.",
+            "Apoya el servidor y obtén beneficios exclusivos en BPBR."
+        ],
+
+        suporteMini: "¿DUDAS O SOPORTE?",
+        suporteTexto: "Habla directamente con nuestro equipo.",
+        suporteBtn: "HABLAR CON NUESTRO EQUIPO",
+
+        alistamentoMini: "( ÚNETE AL BPBR )",
+        alistamentoTitulo: "ALISTAMIENTO",
+        alistamentoTexto: "Únete al Batallón Paracaidista BPBR y juega Battlefield 1 con una comunidad organizada, activa y enfocada en el trabajo en equipo.",
+        alistamentoLista: ["→ Juega con pelotón cerrado", "→ Participa en operaciones organizadas", "→ Recibe apoyo de la comunidad", "→ Participa en eventos y partidas del clan", "→ Fortalece BPBR en el campo de batalla"],
+        alistamentoBtn: "ALISTARSE AHORA",
+
+        equipeMini: "( COMANDO BPBR )",
+        equipeTitulo: "NUESTRO <span>EQUIPO</span>",
+        equipeSub: "Conoce al equipo que mantiene BPBR funcionando.",
+        equipeCargos: ["FUNDADOR", "GENERAL", "FUNDADOR", "GENERAL", "ADM / DESARROLLADOR", "CORONEL", "MODERADOR", "RANGO"]
     }
-}
+};
 
+// =====================================================
+// FUNÇÕES AUXILIARES
+// =====================================================
 
-/* HEADER */
+function alterarTexto(seletor, texto) {
+    const elemento = document.querySelector(seletor);
 
-header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:16px 40px;
-    box-sizing:border-box;
-    background:rgba(0,0,0,.90);
-    border-bottom:1px solid rgba(255,215,0,.25);
-    backdrop-filter:blur(10px);
-    z-index:999;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
-
-.logo img{
-    width:90px;
-    height:90px;
-    object-fit:contain;
-    border-radius:50%;
-    filter:drop-shadow(0 0 15px rgba(255,215,0,.35));
-    transition:.3s ease;
-}
-
-.logo:hover img{
-    transform:scale(1.08);
-}
-
-.logo span{
-    color:#ffd700;
-    font-size:32px;
-    font-weight:900;
-    letter-spacing:1px;
-}
-
-/* IDIOMAS */
-
-.idiomas{
-    display:flex;
-    gap:12px;
-    align-items:center;
-    margin-left:auto;
-    margin-right:25px;
-}
-
-.flag{
-    width:40px;
-    height:40px;
-    border:none;
-    border-radius:50%;
-    cursor:pointer;
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    transition:.3s ease;
-}
-
-.flag:hover{
-    transform:translateY(-3px) scale(1.12);
-    box-shadow:0 0 20px rgba(255,215,0,.55);
-}
-
-.flag.br{
-    background-image:url("img/br.png");
-}
-
-.flag.us{
-    background-image:url("img/us.png");
-}
-
-.flag.ar{
-    background-image:url("img/ar.png");
-}
-
-/* ===================================================== */
-/* MENU */
-/* ===================================================== */
-
-nav{
-    display:flex;
-    gap:24px; /* um pouco menor */
-    align-items:center;
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    font-size:12px; /* MENOR */
-    font-weight:700;
-    letter-spacing:.4px;
-    transition:.3s;
-    position:relative;
-}
-
-nav a:hover{
-    color:gold;
-    transform:translateY(-2px);
-}
-
-nav a::after{
-    content:"";
-    position:absolute;
-    width:0%;
-    height:2px;
-    bottom:-5px;
-    left:0;
-    background:gold;
-    transition:.3s ease;
-}
-
-nav a:hover::after{
-    width:100%;
-}
-
-/* GERAL */
-
-.secao{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-    padding:140px 20px;
-    box-sizing:border-box;
-}
-
-h1{
-    color:gold;
-    font-size:72px;
-    margin:0;
-}
-
-h2{
-    font-size:82px;
-    margin:0;
-    font-weight:900;
-    color:white;
-    text-shadow:0 0 12px rgba(255,255,255,.15), 0 0 25px rgba(255,215,0,.20);
-    animation:tituloGlow 2.5s ease-in-out infinite alternate;
-}
-
-h2 span{
-    color:orange;
-}
-
-@keyframes tituloGlow{
-    from{
-        transform:translateY(0);
-        text-shadow:0 0 10px rgba(255,255,255,.15), 0 0 18px rgba(255,215,0,.15);
-    }
-    to{
-        transform:translateY(-4px);
-        text-shadow:0 0 20px rgba(255,255,255,.25), 0 0 45px rgba(255,215,0,.40);
-    }
-}
-
-.subtitulo{
-    color:#ccc;
-    font-size:22px;
-    margin-top:15px;
-    letter-spacing:3px;
-}
-
-button{
-    background:gold;
-    color:black;
-    border:none;
-    border-radius:10px;
-    padding:16px 35px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
-}
-
-button:hover{
-    transform:scale(1.05);
-    background:#ffbf00;
-}
-
-/* INÍCIO */
-
-.container{
-    background:rgba(0,0,0,.50);
-    padding:50px;
-    border-radius:25px;
-}
-
-.container p{
-    font-size:28px;
-}
-
-.hero .container{
-    position:relative;
-    overflow:hidden;
-    transition:.4s ease;
-    border:1px solid rgba(255,215,0,.25);
-    box-shadow:0 0 35px rgba(255,215,0,.18);
-}
-
-.hero .container:hover{
-    transform:translateY(-8px) scale(1.01);
-    border-color:gold;
-    box-shadow:0 0 45px rgba(255,215,0,.35);
-}
-
-.hero .container::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:100%;
-    height:4px;
-    background:linear-gradient(90deg, transparent, gold, transparent);
-    animation:barraHero 2s linear infinite;
-}
-
-.hero h1{
-    text-shadow:0 0 25px rgba(255,215,0,.65);
-    animation:tituloHero 1.5s ease infinite alternate;
-}
-
-.hero button{
-    margin-top:25px;
-    box-shadow:0 0 25px rgba(255,215,0,.55);
-    animation:pulsarBotao 1.8s infinite;
-}
-
-@keyframes barraHero{
-    from{ left:-100%; }
-    to{ left:100%; }
-}
-
-@keyframes tituloHero{
-    from{ text-shadow:0 0 10px rgba(255,215,0,.3); }
-    to{ text-shadow:0 0 35px rgba(255,215,0,.9); }
-}
-
-@keyframes pulsarBotao{
-    0%{ transform:scale(1); }
-    50%{ transform:scale(1.04); }
-    100%{ transform:scale(1); }
-}
-
-/* APRESENTAÇÃO BPBR */
-
-.apresentacao-section{
-    padding:90px 20px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    box-sizing:border-box;
-}
-
-.apresentacao-card{
-    width:90%;
-    max-width:1300px;
-    background:rgba(0,0,0,.72);
-    border:1px solid rgba(255,215,0,.25);
-    border-radius:35px;
-    padding:50px;
-    backdrop-filter:blur(10px);
-    box-shadow:0 0 40px rgba(0,0,0,.55);
-    transition:.35s ease;
-    overflow:hidden;
-    position:relative;
-    text-align:center;
-    box-sizing:border-box;
-}
-
-.apresentacao-card:hover{
-    transform:translateY(-8px);
-    border-color:gold;
-    box-shadow:0 0 40px rgba(255,215,0,.15);
-}
-
-.apresentacao-card::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-120%;
-    width:60%;
-    height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
-    transform:skewX(-20deg);
-    transition:.9s;
-}
-
-.apresentacao-card:hover::before{
-    left:140%;
-}
-
-.apresentacao-card h2{
-    font-size:72px;
-    color:#fff;
-    margin:15px 0;
-    text-shadow:0 0 25px rgba(255,215,0,.22);
-}
-
-.apresentacao-texto{
-    color:#d8d8d8;
-    font-size:22px;
-    line-height:1.8;
-    max-width:1100px;
-    margin:0 auto;
-}
-
-.vantagens-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:22px;
-    margin-top:40px;
-}
-
-.vantagem-card{
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,215,0,.15);
-    border-radius:22px;
-    padding:30px 22px;
-    transition:.35s ease;
-}
-
-.vantagem-card:hover{
-    transform:translateY(-8px);
-    border-color:gold;
-    box-shadow:0 0 20px rgba(255,215,0,.18);
-}
-
-.vantagem-card span{
-    font-size:45px;
-}
-
-.vantagem-card h3{
-    color:#fff;
-    margin:12px 0;
-}
-
-.vantagem-card p{
-    color:#bdbdbd;
-}
-
-.apresentacao-botoes{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    margin-top:35px;
-}
-
-.apresentacao-botoes button{
-    padding:16px 34px;
-    font-size:18px;
-}
-
-.btn-secundario{
-    background:transparent !important;
-    border:2px solid gold !important;
-    color:gold !important;
-}
-
-.btn-secundario:hover{
-    background:gold !important;
-    color:black !important;
-}
-
-/* SERVIDOR */
-
-.server-card{
-    margin-top:50px;
-    display:flex;
-    gap:35px;
-    align-items:center;
-    width:950px;
-    max-width:90%;
-    background:rgba(0,0,0,.85);
-    border:1px solid rgba(255,215,0,.35);
-    border-radius:30px;
-    padding:30px;
-    backdrop-filter:blur(10px);
-    box-shadow:0 0 30px rgba(0,0,0,.5);
-    transition:.3s ease;
-}
-
-.server-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 0 35px rgba(255,215,0,.18);
-}
-
-.server-card img{
-    width:260px;
-    height:150px;
-    object-fit:cover;
-    border-radius:18px;
-    border:2px solid rgba(255,215,0,.35);
-    transition:.3s ease;
-}
-
-.server-card:hover img{
-    transform:scale(1.04);
-}
-
-.server-content{
-    flex:1;
-    text-align:left;
-}
-
-.server-content h3{
-    font-size:28px;
-    line-height:1.4;
-    margin:0 0 25px 0;
-    color:white;
-}
-
-.server-info{
-    display:flex;
-    gap:40px;
-    flex-wrap:wrap;
-    margin-bottom:25px;
-}
-
-.server-info p{
-    margin:0;
-    color:#ccc;
-    font-size:16px;
-    min-width:90px;
-}
-
-.server-info b{
-    color:white;
-    font-size:17px;
-}
-
-/* VIP */
-
-.aviso-moeda{
-    max-width:650px;
-    margin-top:12px;
-    color:#ffd700;
-    font-size:16px;
-    font-weight:bold;
-    line-height:1.5;
-    text-shadow:0 0 15px rgba(255,215,0,.25);
-}
-
-.vip-premium-card{
-    position:relative;
-    overflow:hidden;
-    width:420px;
-    margin-top:50px;
-    background:linear-gradient(145deg, rgba(20,20,20,.96), rgba(5,5,5,.96));
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:35px;
-    padding:45px;
-    text-align:left;
-    box-shadow:0 0 60px rgba(0,0,0,.7);
-    transition:.4s;
-    transform-style:preserve-3d;
-}
-
-.vip-premium-card:hover{
-    transform:translateY(-12px) scale(1.02) rotateX(2deg) rotateY(-2deg);
-    border-color:gold;
-    box-shadow:0 0 45px rgba(255,215,0,.25);
-}
-
-.vip-premium-card::after{
-    content:"";
-    position:absolute;
-    top:-50%;
-    left:-50%;
-    width:200%;
-    height:200%;
-    background:radial-gradient(circle, rgba(255,215,0,.12), transparent 35%);
-    opacity:0;
-    transition:.4s;
-    pointer-events:none;
-}
-
-.vip-premium-card:hover::after{
-    opacity:1;
-}
-
-.vip-barra{
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:100%;
-    height:4px;
-    background:linear-gradient(90deg, transparent, gold, transparent);
-}
-
-.vip-premium-card:hover .vip-barra{
-    animation:barraVip 1.2s linear infinite;
-}
-
-@keyframes barraVip{
-    from{ left:-100%; }
-    to{ left:100%; }
-}
-
-.vip-premium-card h3{
-    font-size:55px;
-    margin-bottom:10px;
-}
-
-.vip-preco{
-    margin:25px 0;
-}
-
-.vip-preco span{
-    font-size:28px;
-    color:#aaa;
-    font-weight:bold;
-}
-
-.vip-preco strong{
-    font-size:90px;
-    color:white;
-}
-
-.vip-preco small{
-    font-size:22px;
-    color:#aaa;
-}
-
-.vip-premium-card ul{
-    list-style:none;
-    padding:0;
-}
-
-.vip-premium-card li{
-    border-bottom:1px solid rgba(255,255,255,.08);
-    padding:12px 0;
-    color:#d4d4d4;
-    font-size:20px;
-}
-
-.vip-button{
-    width:100%;
-    margin-top:30px;
-    padding:22px;
-    background:transparent;
-    border:2px solid white;
-    border-radius:12px;
-    color:white;
-    font-size:20px;
-    font-weight:bold;
-    letter-spacing:2px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.vip-button:hover{
-    background:gold;
-    border-color:gold;
-    color:black;
-}
-
-/* SOBRE */
-
-.lideranca-section{
-    background:rgba(0,0,0,.88);
-}
-
-.lideranca-container{
-    width:100%;
-    max-width:1200px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:30px;
-}
-
-.lideranca-card-grande,
-.lideranca-card{
-    position:relative;
-    overflow:hidden;
-    cursor:pointer;
-}
-
-.lideranca-card-grande{
-    background:linear-gradient(145deg, rgba(25,25,25,.95), rgba(5,5,5,.95));
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:18px;
-    text-align:left;
-    transition:.35s ease;
-}
-
-.lideranca-card-grande:hover{
-    transform:translateY(-10px) scale(1.02);
-    border-color:gold;
-    box-shadow:0 0 35px rgba(255,215,0,.22);
-}
-
-.lideranca-card-grande img{
-    width:100%;
-    height:300px;
-    object-fit:cover;
-    filter:brightness(.75);
-    transition:.5s ease;
-}
-
-.lideranca-card-grande:hover img{
-    transform:scale(1.08);
-    filter:brightness(1);
-}
-
-.lideranca-conteudo{
-    padding:35px;
-}
-
-.lideranca-conteudo h2{
-    font-size:38px;
-    color:white;
-    margin-bottom:20px;
-}
-
-.lideranca-conteudo p{
-    color:#bbb;
-    font-size:18px;
-}
-
-.lideranca-conteudo ul{
-    list-style:none;
-    padding:0;
-    margin-top:30px;
-}
-
-.lideranca-conteudo li{
-    margin:18px 0;
-    color:white;
-    font-weight:bold;
-}
-
-.lideranca-cards{
-    display:flex;
-    flex-direction:column;
-    gap:25px;
-}
-
-.lideranca-card{
-    background:rgba(20,20,20,.82);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:14px;
-    padding:32px;
-    text-align:left;
-    transition:.35s ease;
-}
-
-.lideranca-card:hover{
-    transform:translateY(-8px) scale(1.03);
-    border-color:gold;
-    box-shadow:0 0 30px rgba(255,215,0,.25);
-}
-
-.lideranca-card::before,
-.lideranca-card-grande::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-120%;
-    width:60%;
-    height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
-    transform:skewX(-25deg);
-    transition:.7s;
-}
-
-.lideranca-card:hover::before,
-.lideranca-card-grande:hover::before{
-    left:140%;
-}
-
-.lideranca-card h3{
-    font-size:28px;
-    margin:0 0 15px;
-}
-
-.lideranca-card p{
-    color:#bbb;
-    font-size:18px;
-}
-
-.lideranca-card button{
-    margin-top:20px;
-    font-size:14px;
-    padding:14px 25px;
-}
-
-.suporte-card{
-    width:100%;
-    max-width:1200px;
-    margin-top:35px;
-    padding:35px;
-    box-sizing:border-box;
-    background:rgba(20,20,20,.82);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:18px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:25px;
-    text-align:left;
-    transition:.35s ease;
-}
-
-.suporte-card:hover{
-    transform:translateY(-8px);
-    border-color:gold;
-    box-shadow:0 0 30px rgba(255,215,0,.20);
-}
-
-.suporte-card small{
-    color:#aaa;
-    letter-spacing:3px;
-    font-weight:bold;
-}
-
-.suporte-card h3{
-    font-size:28px;
-    margin:10px 0 0;
-}
-
-/* ALISTAMENTO */
-
-.alistamento-section{
-    background:rgba(0,0,0,.86);
-}
-
-.alistamento-card{
-    width:100%;
-    max-width:950px;
-    padding:55px;
-    box-sizing:border-box;
-    background:linear-gradient(145deg, rgba(20,20,20,.94), rgba(5,5,5,.96));
-    border:1px solid rgba(255,215,0,.30);
-    border-radius:30px;
-    text-align:left;
-    box-shadow:0 0 45px rgba(0,0,0,.55);
-    position:relative;
-    overflow:hidden;
-    transition:.35s ease;
-}
-
-.alistamento-card:hover{
-    transform:translateY(-10px) scale(1.01);
-    border-color:gold;
-    box-shadow:0 0 40px rgba(255,215,0,.22);
-}
-
-.alistamento-card::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-120%;
-    width:60%;
-    height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,.13), transparent);
-    transform:skewX(-25deg);
-    transition:.7s;
-}
-
-.alistamento-card:hover::before{
-    left:140%;
-}
-
-.alistamento-card .subtitulo,
-.alistamento-card h2,
-.alistamento-card p{
-    text-align:center;
-}
-
-.alistamento-card h2{
-    font-size:70px;
-    margin-bottom:25px;
-}
-
-.alistamento-card p{
-    color:#d0d0d0;
-    font-size:20px;
-    line-height:1.6;
-}
-
-.alistamento-card ul{
-    list-style:none;
-    padding:0;
-    margin:30px auto;
-    max-width:650px;
-}
-
-.alistamento-card li{
-    padding:12px 0;
-    font-size:20px;
-    color:white;
-    font-weight:bold;
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.alistamento-card a{
-    display:flex;
-    justify-content:center;
-    text-decoration:none;
-}
-
-.alistamento-card button{
-    margin-top:25px;
-    box-shadow:0 0 25px rgba(255,215,0,.35);
-}
-
-/* EQUIPE  */
-
-.equipe-section{
-    background:rgba(0,0,0,.88);
-}
-
-.staff-grid{
-    display:grid;
-    grid-template-columns:repeat(2, 320px);
-    justify-content:center;
-    gap:35px;
-    margin-top:55px;
-}
-
-.staff-card{
-    position:relative;
-    overflow:hidden;
-    background:linear-gradient(180deg, rgba(25,25,25,.98), rgba(5,5,5,.98));
-    border:1px solid rgba(255,165,0,.45);
-    border-radius:14px;
-    min-height:430px;
-    box-shadow:0 0 28px rgba(0,0,0,.65);
-    transition:.35s ease;
-}
-
-.staff-card:hover{
-    transform:translateY(-12px) scale(1.03);
-    border-color:gold;
-    box-shadow:0 0 35px rgba(255,165,0,.35);
-}
-
-.staff-card::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-120%;
-    width:60%;
-    height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
-    transform:skewX(-25deg);
-    transition:.8s ease;
-    z-index:5;
-    pointer-events:none;
-}
-
-.staff-card:hover::before{
-    left:140%;
-}
-
-.staff-cover{
-    height:145px;
-    overflow:hidden;
-    border-bottom:1px solid rgba(255,165,0,.25);
-}
-
-.staff-cover img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    filter:brightness(.65);
-    transition:.45s ease;
-}
-
-.staff-card:hover .staff-cover img{
-    transform:scale(1.12);
-    filter:brightness(.9);
-}
-
-.staff-avatar{
-    width:125px;
-    height:125px;
-    border-radius:50%;
-    border:5px solid #ff9900;
-    overflow:hidden;
-    margin:-65px auto 0;
-    position:relative;
-    z-index:3;
-    background:#050505;
-    box-shadow:0 0 18px rgba(255,153,0,.45);
-    transition:.35s ease;
-}
-
-.staff-card:hover .staff-avatar{
-    transform:scale(1.08);
-    box-shadow:0 0 30px rgba(255,215,0,.65);
-}
-
-.staff-avatar img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
-
-.staff-info{
-    text-align:center;
-    padding:25px 25px 35px;
-}
-
-.staff-info h3{
-    font-size:30px;
-    margin:10px 0 28px;
-    color:white;
-    letter-spacing:1px;
-}
-
-.staff-cargo{
-    color:gold;
-    font-size:14px;
-    font-weight:900;
-    letter-spacing:3px;
-    margin:0 0 10px;
-}
-
-.staff-patente{
-    color:#4fd8ff;
-    font-size:16px;
-    font-weight:900;
-    letter-spacing:1px;
-    margin:0 0 24px;
-}
-
-.discord-btn{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width:50px;
-    height:50px;
-    margin:20px auto 0;
-    transition:.3s ease;
-    text-decoration:none;
-}
-
-.discord-btn:hover{
-    transform:translateY(-4px) scale(1.15);
-}
-
-.discord-btn img{
-    width:70px;
-    height:70px;
-    object-fit:contain;
-    display:block;
-    transition:.3s ease;
-}
-
-.discord-btn img:hover{
-    transform:scale(1.12);
-}
-/* FOOTER */
-
-footer{
-    background:#080808;
-    border-top:1px solid rgba(255,255,255,.10);
-    padding:55px 12%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    transition:.35s ease;
-}
-
-footer:hover{
-    box-shadow:0 -10px 40px rgba(255,215,0,.12);
-}
-
-.footer-left{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    color:#aaa;
-    font-weight:bold;
-}
-
-.footer-logo{
-    width:140px;
-    height:140px;
-    object-fit:contain;
-    border-radius:50%;
-    filter:drop-shadow(0 0 18px rgba(255,215,0,.45));
-    transition:.3s ease;
-}
-
-.footer-logo:hover{
-    transform:scale(1.08);
-}
-
-.footer-links{
-    display:flex;
-    gap:35px;
-}
-
-.footer-links a{
-    color:#aaa;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-.footer-links a:hover{
-    color:gold;
-}
-
-/* RESPONSIVO */
-
-@media(max-width:900px){
-    header{
-        flex-direction:column;
-        gap:15px;
-        padding:15px;
-    }
-
-    nav{
-        flex-wrap:wrap;
-        justify-content:center;
-        gap:15px;
-    }
-
-    .idiomas{
-        margin:0;
-    }
-
-    .logo img{
-        width:65px;
-        height:65px;
-    }
-
-    h1{
-        font-size:42px;
-    }
-
-    h2{
-        font-size:45px;
-    }
-
-    .container{
-        width:85%;
-        padding:35px 20px;
-    }
-
-    .server-card{
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .server-content{
-        text-align:center;
-    }
-
-    .server-info{
-        justify-content:center;
-        gap:20px;
-    }
-
-    .server-card img{
-        width:100%;
-        max-width:400px;
-        height:auto;
-    }
-
-    .vip-premium-card{
-        width:85%;
-        padding:35px 25px;
-    }
-
-    .vip-premium-card h3{
-        font-size:38px;
-    }
-
-    .vip-preco strong{
-        font-size:70px;
-    }
-
-    .lideranca-container{
-        grid-template-columns:1fr;
-    }
-
-    .suporte-card{
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .alistamento-card{
-        padding:35px 25px;
-    }
-
-    .alistamento-card h2{
-        font-size:42px;
-    }
-
-    .vantagens-grid{
-    grid-template-columns:1fr;
-}
-
-    .staff-grid{
-        grid-template-columns:1fr;
-        width:90%;
-    }
-
-    .staff-card{
-        width:100%;
-    }
-
-    footer{
-        flex-direction:column;
-        gap:25px;
-        text-align:center;
-    }
-    }
-   /* ===================================================== */
-/* FASE 2 - SERVIDOR PREMIUM BF1 */
-/* ===================================================== */
-
-/* CARD PREMIUM */
-
-.server-card-premium{
-    gap:40px !important;
-    padding:35px !important;
-    border-radius:35px !important;
-    background:linear-gradient(
-        145deg,
-        rgba(15,15,15,.96),
-        rgba(5,5,5,.98)
-    ) !important;
-
-    border:1px solid rgba(255,215,0,.18) !important;
-
-    box-shadow:
-    0 0 45px rgba(0,0,0,.45),
-    0 0 30px rgba(255,215,0,.06);
-}
-
-/* IMAGEM DO MAPA */
-
-.server-img-box{
-    overflow:hidden;
-    border-radius:22px;
-    border:2px solid rgba(255,215,0,.18);
-    min-width:340px;
-    transition:.35s ease;
-}
-
-.server-img-box img{
-    width:340px !important;
-    height:210px !important;
-    object-fit:cover;
-    transition:.45s ease;
-}
-
-.server-img-box:hover{
-    transform:translateY(-6px) scale(1.02);
-    border-color:gold;
-    box-shadow:0 0 25px rgba(255,215,0,.22);
-}
-
-.server-img-box:hover img{
-    transform:scale(1.08);
-    filter:brightness(1.08);
-}
-
-/* TOPO DO SERVIDOR */
-
-.server-topo h3{
-    margin:0;
-    font-size:30px;
-    color:white;
-    transition:.3s ease;
-    cursor:default;
-}
-
-.server-topo h3:hover{
-    transform:translateX(6px);
-    text-shadow:
-        0 0 12px rgba(255,255,255,.25),
-        0 0 25px rgba(255,215,0,.35);
-}
-
-/* STATUS ONLINE */
-
-.server-status-linha{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:18px;
-    color:#6eff76;
-    font-weight:bold;
-    letter-spacing:2px;
-}
-
-.server-status-dot{
-    width:12px;
-    height:12px;
-    background:#3cff00;
-    border-radius:50%;
-    box-shadow:0 0 18px #3cff00;
-    animation:pulsarOnline 1.5s infinite;
-}
-
-@keyframes pulsarOnline{
-    0%{
-        transform:scale(1);
-        opacity:1;
-    }
-
-    50%{
-        transform:scale(1.3);
-        opacity:.7;
-    }
-
-    100%{
-        transform:scale(1);
-        opacity:1;
+    if (elemento && texto !== undefined) {
+        elemento.innerText = texto;
     }
 }
 
-/* BARRA DE SERVIDOR */
+function alterarHTML(seletor, html) {
+    const elemento = document.querySelector(seletor);
 
-.server-barra{
-    width:100%;
-    height:16px !important;
-    border-radius:30px;
-    overflow:hidden;
-    margin-bottom:25px;
-    background:rgba(255,255,255,.05);
-}
-
-#server-barra-fill{
-    height:100%;
-    background:linear-gradient(
-        90deg,
-        #00ff55,
-        #c8ff00,
-        #ffd700
-    );
-
-    border-radius:30px;
-
-    animation:barraGlow 2s infinite alternate;
-}
-
-@keyframes barraGlow{
-    from{
-        filter:brightness(.95);
-    }
-
-    to{
-        filter:brightness(1.15);
+    if (elemento && html !== undefined) {
+        elemento.innerHTML = html;
     }
 }
 
-/* INFO SERVIDOR */
-
-.server-info-premium{
-    display:flex !important;
-    gap:38px !important;
-    flex-wrap:wrap;
-    margin-top:18px;
-    margin-bottom:20px;
-}
-
-.server-info-premium p{
-    margin:0 !important;
-    transition:.25s ease;
-    cursor:default;
-}
-
-@media(max-width:900px){
-    .apresentacao-card h2{
-        font-size:42px;
-    }
-
-    .apresentacao-botoes{
-        flex-direction:column;
-    }
-}}
-
-.server-info-premium p:hover{
-    transform:translateY(-3px) scale(1.05);
-    text-shadow:0 0 12px rgba(255,215,0,.35);
-}
-
-.server-info-premium b{
-    display:block;
-    margin-bottom:4px;
-    color:#ffd700;
-    font-size:14px;
-    letter-spacing:1px;
-}
-
-.server-info-premium span{
-    color:white;
-    font-size:18px;
-    font-weight:bold;
-}
-
-/* BOTÃO SERVIDOR */
-
-.server-btn{
-    width:100%;
-    margin-top:22px;
-    padding:16px !important;
-    font-size:17px !important;
-    letter-spacing:2px;
-    border-radius:15px;
-    transition:.3s ease;
-}
-
-.server-btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 0 18px rgba(255,215,0,.22);
-}
-
-
-/* ===================================================== */
-/* FASE 3 - EVENTOS BPBR */
-/* ===================================================== */
-
-.eventos-section{
-    min-height:auto !important;
-    padding:120px 20px 80px !important;
-}
-
-.evento-card{
-    width:1200px;
-    max-width:95%;
-
-    display:flex;
-    align-items:center;
-    gap:35px;
-
-    background:rgba(0,0,0,.86);
-    border:1px solid rgba(255,215,0,.25);
-    border-radius:28px;
-
-    padding:28px;
-    margin-top:40px;
-
-    overflow:hidden;
-    box-sizing:border-box;
-
-    backdrop-filter:blur(10px);
-    box-shadow:0 0 35px rgba(0,0,0,.45);
-
-    transition:.35s ease;
-}
-
-.evento-card:hover{
-    transform:translateY(-5px);
-    border-color:gold;
-    box-shadow:0 0 30px rgba(255,215,0,.12);
-}
-
-/* IMAGEM EVENTO */
-
-.evento-imagem{
-    width:48%;
-    flex-shrink:0;
-}
-
-.evento-imagem img{
-    width:100%;
-    height:380px;
-    object-fit:cover;
-    border-radius:22px;
-    border:1px solid rgba(255,215,0,.25);
-    transition:.35s ease;
-}
-
-.evento-imagem:hover img{
-    transform:scale(1.04);
-}
-
-/* TEXTO EVENTO */
-
-.evento-conteudo{
-    width:52%;
-    text-align:left;
-}
-
-/* EVENTO DA SEMANA */
-
-.evento-tag{
-    display:inline-block;
-    position:relative;
-    overflow:hidden;
-
-    padding:10px 18px;
-    border-radius:12px;
-
-    background:rgba(255,215,0,.12);
-    border:1px solid rgba(255,215,0,.25);
-
-    color:gold;
-    font-weight:900;
-    letter-spacing:1px;
-
-    margin-bottom:20px;
-
-    animation:eventoMexendo 2s infinite ease-in-out;
-}
-
-@keyframes eventoMexendo{
-    0%{ transform:translateY(0); }
-    50%{ transform:translateY(-6px); }
-    100%{ transform:translateY(0); }
-}
-
-.evento-tag::after{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-120%;
-    width:70%;
-    height:100%;
-
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.35),
-        transparent
-    );
-
-    transform:skewX(-20deg);
-
-    animation:brilhoEvento 2.8s infinite;
-}
-
-@keyframes brilhoEvento{
-    0%{ left:-120%; }
-    50%{ left:140%; }
-    100%{ left:140%; }
-}
-
-/* TITULO EVENTO */
-
-.evento-conteudo h3{
-    font-size:58px;
-    font-weight:900;
-    margin:0 0 15px;
-
-    background:linear-gradient(
-        90deg,
-        #fff,
-        #ffd700
-    );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-
-    transition:.35s ease;
-}
-
-.evento-conteudo h3:hover{
-    transform:translateX(8px);
-}
-
-/* DESCRIÇÃO */
-
-.evento-conteudo p{
-    font-size:22px;
-    line-height:1.9;
-    color:#d8d8d8;
-    transition:.35s ease;
-}
-
-.evento-conteudo p:hover{
-    transform:translateX(8px);
-    color:white;
-    text-shadow:0 0 12px rgba(255,215,0,.20);
-}
-
-/* DETALHES */
-
-.evento-detalhes{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-bottom:28px;
-}
-
-.evento-detalhes span{
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:14px;
-    padding:14px;
-
-    color:white;
-    font-weight:bold;
-
-    transition:.35s ease;
-}
-
-.evento-detalhes span:hover{
-    transform:translateY(-5px) scale(1.03);
-    border-color:gold;
-    box-shadow:0 0 18px rgba(255,215,0,.20);
-}
-
-/* BOTÃO EVENTO */
-
-.evento-conteudo button{
-    width:100%;
-    padding:18px;
-    border-radius:14px;
-}
-
-/* RESPONSIVO */
-
-@media(max-width:900px){
-
-    .evento-card{
-        flex-direction:column;
-    }
-
-    .evento-imagem,
-    .evento-conteudo{
-        width:100%;
-    }
-
-    .evento-imagem img{
-        height:260px;
-    }
-
-    .evento-conteudo{
-        text-align:center;
-    }
-
-    .evento-detalhes{
-        grid-template-columns:1fr;
-    }
-    }
-    /* ===================================================== */
-/* VIP PREMIUM - RESTAURAR ANIMAÇÕES */
-/* ===================================================== */
-
-.vip-selo{
-    position:absolute !important;
-    top:16px !important;
-    right:16px !important;
-    background:linear-gradient(135deg,#ffd700,#ff9900);
-    color:#111;
-    padding:10px 18px;
-    border-radius:14px;
-    font-size:13px;
-    font-weight:900;
-    letter-spacing:1px;
-    box-shadow:0 0 25px rgba(255,215,0,.35);
-    z-index:10;
-    overflow:hidden;
-    animation:seloMexendo 1.8s infinite ease-in-out !important;
-}
-
-@keyframes seloMexendo{
-    0%{ transform:translateY(0) rotate(0deg) scale(1); }
-    25%{ transform:translateY(-5px) rotate(-1deg) scale(1.03); }
-    50%{ transform:translateY(0) rotate(0deg) scale(1); }
-    75%{ transform:translateY(3px) rotate(1deg) scale(1.02); }
-    100%{ transform:translateY(0) rotate(0deg) scale(1); }
-}
-
-.vip-selo::after{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-120%;
-    width:80%;
-    height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
-    transform:skewX(-20deg);
-    animation:brilhoSeloVip 2.8s infinite;
-}
-
-@keyframes brilhoSeloVip{
-    0%{ left:-120%; }
-    45%{ left:140%; }
-    100%{ left:140%; }
-}
-
-.vip-premium-card{
-    width:430px !important;
-    margin-top:25px !important;
-    padding:30px 32px !important;
-    border-radius:28px !important;
-}
-
-.vip-premium-card h3{
-    font-size:40px !important;
-    margin-bottom:5px !important;
-}
-
-.vip-preco{
-    margin:15px 0 !important;
-}
-
-.vip-preco strong{
-    font-size:68px !important;
-}
-
-.vip-preco span{
-    font-size:22px !important;
-}
-
-.vip-preco small{
-    font-size:18px !important;
-}
-
-.vip-premium-card li{
-    padding:8px 0 !important;
-    font-size:17px !important;
-    transition:.3s ease !important;
-    cursor:default;
-}
-
-.vip-premium-card li:hover{
-    transform:translateX(8px) scale(1.03);
-    color:#fff !important;
-    border-bottom-color:rgba(255,215,0,.35) !important;
-    text-shadow:0 0 12px rgba(255,215,0,.35);
-}
-
-.vip-comparativo{
-    display:grid !important;
-    grid-template-columns:1fr 1fr !important;
-    gap:10px !important;
-    margin-top:14px !important;
-}
-
-.vip-comparativo div{
-    position:relative;
-    overflow:hidden;
-    padding:10px !important;
-    border-radius:12px !important;
-    background:rgba(255,255,255,.04) !important;
-    border:1px solid rgba(255,255,255,.09) !important;
-    transition:.35s ease !important;
-}
-
-.vip-comparativo div:hover{
-    transform:translateY(-5px) scale(1.04);
-    border-color:gold !important;
-    box-shadow:0 0 20px rgba(255,215,0,.25);
-}
-
-.vip-comparativo div:nth-child(2):hover{
-    box-shadow:0 0 24px rgba(0,255,100,.25), 0 0 18px rgba(255,215,0,.18);
-}
-
-.vip-comparativo h4{
-    font-size:13px !important;
-    margin:0 0 6px !important;
-    color:gold !important;
-}
-
-.vip-comparativo p{
-    font-size:12px !important;
-    margin:4px 0 !important;
-    line-height:1.2 !important;
-}
-
-.vip-button{
-    margin-top:15px !important;
-    padding:16px !important;
-    font-size:16px !important;
-}
-/* ===================================================== */
-/* ANIMAÇÕES EXTRAS - SOBRE / ALISTAMENTO */
-/* ===================================================== */
-
-/* Textos dos cards da seção SOBRE */
-.lideranca-card h3,
-.lideranca-card p,
-.lideranca-conteudo h2,
-.lideranca-conteudo p,
-.lideranca-conteudo li{
-    transition:.3s ease;
-    cursor:default;
-}
-
-.lideranca-card h3:hover,
-.lideranca-card p:hover,
-.lideranca-conteudo h2:hover,
-.lideranca-conteudo p:hover,
-.lideranca-conteudo li:hover{
-    transform:translateX(8px) scale(1.02);
-    color:#fff;
-    text-shadow:0 0 12px rgba(255,215,0,.30);
-}
-
-/* Itens do alistamento */
-.alistamento-card li,
-.alistamento-card p{
-    transition:.3s ease;
-    cursor:default;
-}
-
-.alistamento-card li:hover,
-.alistamento-card p:hover{
-    transform:translateX(8px) scale(1.02);
-    color:#fff;
-    text-shadow:0 0 12px rgba(255,215,0,.30);
-}
-
-/* Título ALISTAMENTO com hover */
-.alistamento-card h2{
-    transition:.35s ease;
-    cursor:default;
-}
-
-.alistamento-card h2:hover{
-    transform:scale(1.03);
-    text-shadow:
-        0 0 18px rgba(255,255,255,.25),
-        0 0 35px rgba(255,215,0,.45);
+function alterarTodos(seletor, textos) {
+    const elementos = document.querySelectorAll(seletor);
+
+    elementos.forEach(function(elemento, index) {
+        if (textos && textos[index] !== undefined) {
+            elemento.innerText = textos[index];
         }
-        /* ===================================================== */
-/* FASE 4 - BOTÕES PREMIUM COM BRILHO */
-/* ===================================================== */
-
-button{
-    position:relative;
-    overflow:hidden;
+    });
 }
 
-button::after{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-120%;
-    width:60%;
-    height:100%;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.45),
-        transparent
-    );
-    transform:skewX(-20deg);
-    transition:.6s ease;
-}
+// =====================================================
+// SERVIDOR BF1
+// =====================================================
 
-button:hover::after{
-    left:140%;
-}
+async function carregarServidor() {
+    try {
+        const resposta = await fetch(
+            "https://api.gametools.network/bf1/servers?name=%2301(BPBR)&platform=pc"
+        );
 
-button:hover{
-    box-shadow:0 0 22px rgba(255,215,0,.35);
-}
+        if (!resposta.ok) return;
 
-/* ===================================================== */
-/* FASE 4 - ANIMAÇÃO DE ENTRADA DOS CARDS */
-/* ===================================================== */
+        const dados = await resposta.json();
+        if (!dados.servers || dados.servers.length === 0) return;
 
-.server-card,
-.vip-premium-card,
-.evento-card,
-.lideranca-card,
-.staff-card,
-.alistamento-card,
-.card,
-.box{
-    opacity:0;
-    transform:translateY(50px);
-    animation:fadeCard .9s ease forwards;
-}
+        const servidor = dados.servers[0];
 
-/* Delay suave entre seções */
-.server-card{ animation-delay:.1s; }
-.evento-card{ animation-delay:.2s; }
-.vip-premium-card{ animation-delay:.3s; }
-.alistamento-card{ animation-delay:.4s; }
+        const serverName = document.getElementById("server-name");
+        const players = document.getElementById("players");
+        const queue = document.getElementById("queue");
+        const map = document.getElementById("map");
+        const mode = document.getElementById("mode");
+        const serverImage = document.getElementById("server-image");
+        const barraFill = document.getElementById("server-barra-fill");
 
-@keyframes fadeCard{
-    to{
-        opacity:1;
-        transform:translateY(0);
+        if (serverName) serverName.innerText = servidor.prefix || servidor.name || "Servidor BPBR";
+        if (players) players.innerText = (servidor.playerAmount ?? "--") + "/" + (servidor.maxPlayers ?? "--");
+        if (queue) queue.innerText = servidor.inQue ?? "--";
+        if (map) map.innerText = servidor.currentMap ?? "--";
+        if (mode) mode.innerText = servidor.mode ?? "--";
+
+        if (serverImage && servidor.url) {
+            serverImage.src = servidor.url + "?t=" + Date.now();
+        }
+
+        if (barraFill && servidor.maxPlayers) {
+            const porcentagem = Math.min(
+                100,
+                Math.round((servidor.playerAmount / servidor.maxPlayers) * 100)
+            );
+
+            barraFill.style.width = porcentagem + "%";
+        }
+
+    } catch (erro) {
+        console.log("Erro ao carregar servidor:", erro);
     }
 }
 
+// =====================================================
+// EFEITO DO MOUSE NO FUNDO
+// =====================================================
 
-/* ===================================================== */
-/* FASE 4 - IMAGENS PREMIUM / CINEMATOGRÁFICAS */
-/* ===================================================== */
+document.addEventListener("mousemove", function(event) {
+    const x = (event.clientX / window.innerWidth - 0.5) * 25;
+    const y = (event.clientY / window.innerHeight - 0.5) * 25;
 
-/* Caixa das imagens */
-.server-img-box,
-.evento-imagem,
-.lideranca-img,
-.lideranca-card img{
-    overflow:hidden;
-    border-radius:22px;
-}
+    document.documentElement.style.setProperty("--mouse-x", x + "px");
+    document.documentElement.style.setProperty("--mouse-y", y + "px");
+});
 
-/* Todas as imagens */
-.server-img-box img,
-.evento-imagem img,
-.lideranca-img img,
-.lideranca-card img{
-    transition:
-        transform .55s ease,
-        filter .55s ease,
-        box-shadow .4s ease;
-}
+// =====================================================
+// MENU MOBILE
+// =====================================================
 
-/* Hover cinematográfico */
-.server-img-box:hover img,
-.evento-imagem:hover img,
-.lideranca-img:hover img,
-.lideranca-card:hover img{
-    transform:scale(1.08);
-    filter:
-        brightness(1.08)
-        contrast(1.06)
-        saturate(1.05);
+function toggleMenuMobile() {
+    const menu = document.querySelector("header nav.menu");
 
-    box-shadow:
-        0 0 20px rgba(255,215,0,.18);
-}
-/* ===================================================== */
-/* FASE 4 - GLOW PREMIUM NOS TÍTULOS */
-/* ===================================================== */
-
-.secao h2,
-.apresentacao-card h2,
-.alistamento-card h2,
-.evento-conteudo h3{
-    transition:.35s ease;
-}
-
-.secao h2:hover,
-.apresentacao-card h2:hover,
-.alistamento-card h2:hover,
-.evento-conteudo h3:hover{
-    transform:scale(1.02);
-    text-shadow:
-        0 0 18px rgba(255,255,255,.25),
-        0 0 35px rgba(255,215,0,.45),
-        0 0 55px rgba(255,153,0,.25);
-}
-/* ===================================================== */
-/* RESPONSIVO MOBILE - HEADER / MENU */
-/* ===================================================== */
-
-@media(max-width:900px){
-
-    section{
-        scroll-margin-top:170px;
-    }
-
-    .secao{
-        padding:180px 16px 70px !important;
-        min-height:auto !important;
-    }
-
-    h1{
-        font-size:34px !important;
-        line-height:1.15 !important;
-    }
-
-    h2{
-        font-size:36px !important;
-        line-height:1.15 !important;
-    }
-
-    .subtitulo{
-        font-size:16px !important;
-        letter-spacing:3px !important;
-    }
-
-    .hero .container{
-        width:88% !important;
-        padding:28px 18px !important;
-    }
-
-    .container p{
-        font-size:18px !important;
-    }
-
-    /* SERVIDOR */
-    .server-card-premium{
-        width:88% !important;
-        max-width:360px !important;
-        padding:22px !important;
-        overflow:hidden !important;
-    }
-
-    .server-topo h3,
-    #server-name{
-        font-size:22px !important;
-        line-height:1.25 !important;
-        max-width:100% !important;
-        overflow-wrap:anywhere !important;
-        word-break:break-word !important;
-        text-align:center !important;
-    }
-
-    .server-img-box{
-        min-width:100% !important;
-        width:100% !important;
-    }
-
-    .server-img-box img{
-        width:100% !important;
-        height:190px !important;
-    }
-
-    .server-info-premium{
-        display:grid !important;
-        grid-template-columns:1fr 1fr !important;
-        gap:18px !important;
-        justify-items:center !important;
-    }
-
-    .server-btn{
-        width:100% !important;
-        font-size:13px !important;
-    }
-
-    /* VIP */
-    .vip-premium-card{
-        width:88% !important;
-        max-width:350px !important;
-        padding:28px 24px !important;
-    }
-
-    .vip-premium-card h3{
-        font-size:32px !important;
-        margin-top:25px !important;
-    }
-
-    .vip-comparativo{
-        grid-template-columns:1fr !important;
-    }
-
-    /* SOBRE */
-    .lideranca-container{
-        grid-template-columns:1fr !important;
-        width:90% !important;
-    }
-
-    .lideranca-card-grande img{
-        height:230px !important;
-    }
-
-    .lideranca-conteudo h2{
-        font-size:34px !important;
-    }
-
-    /* ALISTAMENTO */
-    .alistamento-card{
-        width:90% !important;
-        padding:35px 25px !important;
-    }
-
-    .alistamento-card h2{
-        font-size:36px !important;
-    }
-
-    /* EQUIPE */
-    .staff-grid{
-        grid-template-columns:1fr !important;
-        width:88% !important;
+    if (menu) {
+        menu.classList.toggle("menu-aberto");
     }
 }
-/* CORREÇÃO MOBILE - APRESENTAÇÃO BPBR */
 
-@media(max-width:900px){
+// =====================================================
+// FUNÇÃO DE TRADUÇÃO
+// =====================================================
 
-    .apresentacao-card{
-        width:88% !important;
-        max-width:350px !important;
-        padding:30px 18px !important;
-        overflow:hidden !important;
-    }
+function trocarIdioma(idioma) {
+    const t = TRADUCOES[idioma];
+    const evento = EVENTO_SEMANA[idioma];
 
-    .apresentacao-texto{
-        font-size:18px !important;
-        line-height:1.6 !important;
-        max-width:100% !important;
-    }
+    if (!t || !evento) return;
 
-    .vantagens-grid{
-        display:grid !important;
-        grid-template-columns:1fr !important;
-        gap:18px !important;
-        width:100% !important;
-    }
+    alterarTodos(".menu a", t.menu);
 
-    .vantagem-card{
-        width:100% !important;
-        box-sizing:border-box !important;
-        padding:25px 18px !important;
-    }
+    alterarTexto("#inicio h1", t.inicioTitulo);
+    alterarTexto("#inicio p", t.inicioSub);
+    alterarTexto("#inicio button", t.inicioBtn);
 
-    .apresentacao-botoes{
-        display:flex !important;
-        flex-direction:column !important;
-        gap:14px !important;
-        width:100% !important;
-    }
+    alterarTexto("#apresentacao .subtitulo", t.apresentacaoMini);
+    alterarTexto("#apresentacao h2", t.apresentacaoTitulo);
+    alterarTexto(".apresentacao-texto", t.apresentacaoTexto);
+    alterarTodos(".vantagem-card h3", t.apresentacaoCardsTitulo);
+    alterarTodos(".vantagem-card p", t.apresentacaoCardsTexto);
 
-    .apresentacao-botoes button{
-        width:100% !important;
-        font-size:15px !important;
-        padding:15px !important;
-    }
-}
-/* CORREÇÃO MOBILE - APRESENTAÇÃO MAIS COMPACTA */
+    const botoesAp = document.querySelectorAll(".apresentacao-botoes button");
+    if (botoesAp[0]) botoesAp[0].innerText = t.apresentacaoBotoes[0];
+    if (botoesAp[1]) botoesAp[1].innerText = t.apresentacaoBotoes[1];
 
-@media(max-width:900px){
+    alterarTexto("#servidores .subtitulo", t.servidoresMini);
+    alterarHTML("#servidores-titulo", t.servidoresTitulo);
+    alterarTexto("#servidores-sub", t.servidoresSub);
+    alterarTexto("#status-online", t.servidorOnline);
+    alterarTexto("#players-label", t.servidorLabels[0]);
+    alterarTexto("#fila-label", t.servidorLabels[1]);
+    alterarTexto("#mapa-label", t.servidorLabels[2]);
+    alterarTexto("#modo-label", t.servidorLabels[3]);
+    alterarTexto("#entrar-servidor-btn", t.servidorBtn);
 
-    .apresentacao-card{
-        max-width:360px !important;
-        padding:25px 16px !important;
-    }
+    alterarTexto("#eventos .subtitulo", t.eventosMini);
+    alterarHTML("#eventos h2", t.eventosTitulo);
+    alterarTexto("#eventos > p:not(.subtitulo)", t.eventosSub);
 
-    .vantagens-grid{
-        grid-template-columns:1fr 1fr !important;
-        gap:12px !important;
-    }
+    alterarTexto("#evento-tag", evento.tag);
+    alterarTexto("#evento-titulo", evento.titulo);
+    alterarTexto("#evento-descricao", evento.descricao);
+    alterarTexto("#evento-data", evento.data);
+    alterarTexto("#evento-horario", evento.horario);
+    alterarTexto("#evento-mapa", evento.mapa);
+    alterarTexto("#evento-modo", evento.modo);
+    alterarTexto("#evento-btn", evento.botao);
 
-    .vantagem-card{
-        padding:18px 10px !important;
-        min-height:170px !important;
-    }
+    alterarTexto("#vip h2", t.vipTitulo);
+    alterarTexto("#vip-sub", t.vipSub);
+    alterarTexto(".vip-selo", t.vipSelo);
+    alterarTexto("#vip-nome", t.vipNome);
+    alterarTodos(".vip-beneficio", t.vipBeneficios);
+    alterarTexto("#sem-vip", t.vipComparativoTitulos[0]);
+    alterarTexto("#com-vip", t.vipComparativoTitulos[1]);
+    alterarTodos(".sem-vip-list p", t.vipComparativoTextos.slice(0, 3));
+    alterarTodos(".com-vip-list p", t.vipComparativoTextos.slice(3, 6));
+    alterarTexto("#vip-apoiar-btn", t.vipBtn);
 
-    .vantagem-card span{
-        font-size:32px !important;
-    }
+    alterarTexto("#home-titulo", t.sobreTitulo);
+    alterarTexto("#home-texto", t.sobreTexto);
+    alterarTodos(".home-lista li", t.sobreLista);
+    alterarTodos(".lideranca-card h3", t.liderancaCardsTitulo);
+    alterarTodos(".lideranca-card p", t.liderancaCardsTexto);
 
-    .vantagem-card h3{
-        font-size:15px !important;
-        line-height:1.15 !important;
-    }
+    alterarTexto("#suporte-titulo", t.suporteMini);
+    alterarTexto("#suporte-texto", t.suporteTexto);
+    alterarTexto("#suporte-btn", t.suporteBtn);
 
-    .vantagem-card p{
-        font-size:13px !important;
-        line-height:1.25 !important;
-    }
-}
-/* EQUIPE MOBILE 2x2 */
+    alterarTexto("#alistamento .subtitulo", t.alistamentoMini);
+    alterarTexto("#alistamento-titulo", t.alistamentoTitulo);
+    alterarTexto("#alistamento-texto", t.alistamentoTexto);
+    alterarTodos(".alistamento-lista li", t.alistamentoLista);
+    alterarTexto("#alistamento-btn", t.alistamentoBtn);
 
-@media(max-width:900px){
+    alterarTexto("#equipe .subtitulo", t.equipeMini);
+    alterarHTML("#equipe h2", t.equipeTitulo);
+    alterarTexto("#equipe > p", t.equipeSub);
 
-    .staff-grid,
-    .equipe-grid,
-    .team-grid{
-        display:grid !important;
-        grid-template-columns:1fr 1fr !important;
-        gap:14px !important;
-        width:92% !important;
-        margin:auto !important;
-    }
+    const cargos = document.querySelectorAll(".staff-cargo");
+    const patentes = document.querySelectorAll(".staff-patente");
 
-    .staff-card,
-    .membro-card,
-    .team-card{
-        width:100% !important;
-        min-height:auto !important;
-        padding:15px 10px !important;
-    }
+    if (cargos[0]) cargos[0].innerText = t.equipeCargos[0];
+    if (patentes[0]) patentes[0].innerText = t.equipeCargos[1];
+    if (cargos[1]) cargos[1].innerText = t.equipeCargos[2];
+    if (patentes[1]) patentes[1].innerText = t.equipeCargos[3];
+    if (cargos[2]) cargos[2].innerText = t.equipeCargos[4];
+    if (patentes[2]) patentes[2].innerText = t.equipeCargos[5];
+    if (cargos[3]) cargos[3].innerText = t.equipeCargos[6];
+    if (patentes[3]) patentes[3].innerText = t.equipeCargos[7];
 
-    .staff-card img,
-    .membro-card img,
-    .team-card img{
-        width:90px !important;
-        height:90px !important;
-    }
-
-    .staff-card h3,
-    .membro-card h3,
-    .team-card h3{
-        font-size:16px !important;
-    }
-
-    .staff-card p,
-    .membro-card p,
-    .team-card p{
-        font-size:12px !important;
-    }
-}
-/* ===================================================== */
-/* EQUIPE MOBILE 2x2 -  */
-/* ===================================================== */
-
-@media(max-width:900px){
-
-    .equipe-section .staff-grid{
-        display:grid !important;
-        grid-template-columns:repeat(2, 1fr) !important;
-        gap:14px !important;
-        width:92% !important;
-        max-width:360px !important;
-        margin:35px auto 0 !important;
-    }
-
-    .equipe-section .staff-card{
-        width:100% !important;
-        min-height:300px !important;
-        padding:0 !important;
-    }
-
-    .equipe-section .staff-cover{
-        height:90px !important;
-    }
-
-    .equipe-section .staff-avatar{
-        width:80px !important;
-        height:80px !important;
-        margin:-40px auto 0 !important;
-        border-width:4px !important;
-    }
-
-    .equipe-section .staff-info{
-        padding:18px 8px 22px !important;
-    }
-
-    .equipe-section .staff-info h3{
-        font-size:18px !important;
-        margin:8px 0 16px !important;
-    }
-
-    .equipe-section .staff-cargo{
-        font-size:10px !important;
-        letter-spacing:2px !important;
-    }
-
-    .equipe-section .staff-patente{
-        font-size:12px !important;
-    }
-
-    .equipe-section .discord-btn img{
-        width:45px !important;
-        height:45px !important;
-    }
-}
-/* ===================================================== */
-/* EVENTO MOBILE CORRIGIDO */
-/* ===================================================== */
-
-@media(max-width:900px){
-
-    .eventos-section{
-        padding:170px 16px 70px !important;
-    }
-
-    .evento-card{
-        width:88% !important;
-        max-width:350px !important;
-        display:flex !important;
-        flex-direction:column !important;
-        gap:18px !important;
-        padding:18px !important;
-        overflow:hidden !important;
-    }
-
-    .evento-imagem{
-        width:100% !important;
-    }
-
-    .evento-imagem img{
-        width:100% !important;
-        height:210px !important;
-        object-fit:cover !important;
-        border-radius:18px !important;
-    }
-
-    .evento-conteudo{
-        width:100% !important;
-        text-align:center !important;
-    }
-
-    .evento-tag{
-        font-size:13px !important;
-        padding:9px 14px !important;
-        margin-bottom:14px !important;
-    }
-
-    .evento-conteudo h3{
-        font-size:34px !important;
-        line-height:1.1 !important;
-        margin-bottom:14px !important;
-    }
-
-    .evento-conteudo p{
-        font-size:17px !important;
-        line-height:1.6 !important;
-    }
-
-    .evento-detalhes{
-        grid-template-columns:1fr !important;
-        gap:10px !important;
-        margin-bottom:22px !important;
-    }
-
-    .evento-detalhes span{
-        font-size:14px !important;
-        padding:13px !important;
-    }
-
-    .evento-conteudo button{
-        font-size:14px !important;
-        padding:15px !important;
-        width:100% !important;
-    }
-}
-/* ===================================================== */
-/* EQUIPE MOBILE - AJUSTE CAPA E FOTO */
-/* ===================================================== */
-
-@media(max-width:900px){
-
-    .equipe-section .staff-cover{
-        height:82px !important;
-        width:100% !important;
-        overflow:hidden !important;
-        border-bottom:1px solid rgba(255,165,0,.35) !important;
-    }
-
-    .equipe-section .staff-cover img{
-        width:100% !important;
-        height:100% !important;
-        object-fit:cover !important;
-        object-position:center !important;
-        display:block !important;
-    }
-
-    .equipe-section .staff-avatar{
-        width:74px !important;
-        height:74px !important;
-        margin:-37px auto 0 !important;
-        border:4px solid #ff9900 !important;
-        border-radius:50% !important;
-        overflow:hidden !important;
-        background:#050505 !important;
-    }
-
-    .equipe-section .staff-avatar img{
-        width:100% !important;
-        height:100% !important;
-        object-fit:cover !important;
-        object-position:center top !important;
-        display:block !important;
-    }
-
-    .equipe-section .staff-card{
-        overflow:hidden !important;
-    }
-}
-/* =========================
-   AJUSTE MOBILE
-========================= */
-@media (max-width: 768px) {
-
-    /* Header menor no celular */
-    header {
-        padding: 10px 15px;
-    }
-
-    /* Logo menor */
-    .logo img {
-        width: 70px;
-    }
-
-    /* Nome BPBR menor */
-    .logo h1 {
-        font-size: 42px;
-    }
-
-    /* Bandeiras menores */
-    .language-selector img {
-        width: 70px;
-    }
-
-    /* Menu centralizado */
-    nav ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
-    }
-
-    /*CORREÇÃO DO PROBLEMA celular */
-    .hero,
-    .inicio,
-    #inicio {
-        padding-top: 60px !important;
-    }
-
-    /* Texto do banner */
-    .hero h1,
-    #inicio h1 {
-        font-size: 55px;
-        line-height: 1.0;
-    }
-
-    .hero p,
-    #inicio p {
-        font-size: 20px;
-    }
-
-    /* Botão menor */
-    .hero-btn,
-    .discord-btn-home {
-        width: 90%;
-        font-size: 18px;
-    }
-}
-/* =========================
-   MENU HAMBÚRGUER MOBILE
-========================= */
-
-.menu-mobile-btn {
-    display: none;
+    localStorage.setItem("idioma", idioma);
 }
 
-@media (max-width: 768px) {
+// Deixa as funções disponíveis para os botões onclick do HTML.
+window.trocarIdioma = trocarIdioma;
+window.toggleMenuMobile = toggleMenuMobile;
 
-    .menu-mobile-btn {
-        display: block !important;
-        background: linear-gradient(135deg, #ffd700, #ffae00);
-        color: #000;
-        border: none;
-        border-radius: 999px;
-        padding: 11px 22px;
-        font-size: 14px;
-        font-weight: 900;
-        letter-spacing: 1px;
-        cursor: pointer;
-        box-shadow: 0 0 18px rgba(255, 215, 0, .45);
-        margin: 5px auto 0;
-    }
+// =====================================================
+// INICIAR SITE
+// =====================================================
 
-    .menu {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 10px !important;
-    }
+document.addEventListener("DOMContentLoaded", function() {
+    const idiomaSalvo = localStorage.getItem("idioma") || "pt";
 
-    .menu a {
-        display: none !important;
-    }
+    trocarIdioma(idiomaSalvo);
+    carregarServidor();
 
-    .menu.menu-aberto a {
-        display: block !important;
-        width: 220px;
-        text-align: center;
-        padding: 11px 14px !important;
-        border-radius: 12px !important;
-        background: rgba(255, 255, 255, .06) !important;
-        border: 1px solid rgba(255, 215, 0, .25) !important;
-    }
-}
-/* =========================
-   MENU HAMBÚRGUER MOBILE
-========================= */
+    setInterval(carregarServidor, 15000);
 
-.menu-mobile-btn{
-    display:none;
-}
+    document.querySelectorAll("header nav.menu a").forEach(function(link) {
+        link.addEventListener("click", function() {
+            const menu = document.querySelector("header nav.menu");
 
-@media(max-width:768px){
-    header{
-        position:relative !important;
-        width:100% !important;
-        height:auto !important;
-        min-height:auto !important;
-        padding:18px 10px 22px !important;
-        display:flex !important;
-        flex-direction:column !important;
-        align-items:center !important;
-        justify-content:center !important;
-        gap:16px !important;
-        overflow:visible !important;
-        z-index:1000 !important;
-    }
-
-    header .logo{
-        display:flex !important;
-        align-items:center !important;
-        justify-content:center !important;
-        gap:14px !important;
-        margin:0 !important;
-    }
-
-    header .idiomas{
-        display:flex !important;
-        justify-content:center !important;
-        align-items:center !important;
-        gap:12px !important;
-        margin:0 !important;
-    }
-
-    header nav.menu{
-        display:flex !important;
-        width:100% !important;
-        min-height:55px !important;
-        flex-direction:column !important;
-        align-items:center !important;
-        justify-content:center !important;
-        gap:10px !important;
-        overflow:visible !important;
-        position:relative !important;
-        z-index:99999 !important;
-        margin:0 !important;
-        padding:0 !important;
-    }
-
-    header nav.menu #btn-menu-mobile,
-    header nav.menu .menu-mobile-btn,
-    #btn-menu-mobile{
-        display:flex !important;
-        visibility:visible !important;
-        opacity:1 !important;
-        width:220px !important;
-        min-height:46px !important;
-        align-items:center !important;
-        justify-content:center !important;
-        padding:12px 18px !important;
-        margin:5px auto 0 !important;
-        border-radius:999px !important;
-        background:linear-gradient(135deg,#ffd700,#ffae00) !important;
-        color:#000 !important;
-        border:none !important;
-        font-size:15px !important;
-        font-weight:900 !important;
-        letter-spacing:1px !important;
-        text-align:center !important;
-        cursor:pointer !important;
-        box-shadow:0 0 18px rgba(255,215,0,.45) !important;
-        position:relative !important;
-        z-index:999999 !important;
-    }
-
-    header nav.menu > a{
-        display:none !important;
-    }
-
-    header nav.menu.menu-aberto > a{
-        display:block !important;
-        width:220px !important;
-        text-align:center !important;
-        padding:11px 14px !important;
-        border-radius:12px !important;
-        background:rgba(255,255,255,.08) !important;
-        border:1px solid rgba(255,215,0,.28) !important;
-        color:#fff !important;
-    }
-
-    #inicio,
-    .hero{
-        margin-top:0 !important;
-        padding:40px 10px 70px !important;
-        min-height:auto !important;
-    }
-
-    .hero .container{
-        width:100% !important;
-        max-width:92% !important;
-        margin:0 auto !important;
-        padding:28px 14px !important;
-    }
-
-    .hero h1{
-        font-size:38px !important;
-        line-height:1.08 !important;
-        margin:0 0 18px !important;
-    }
-
-    .hero p{
-        font-size:20px !important;
-        line-height:1.25 !important;
-        margin:0 0 28px !important;
-    }
-
-    .hero button{
-        width:100% !important;
-        max-width:300px !important;
-        padding:18px 18px !important;
-        font-size:17px !important;
-    }
-}
-/* =========================
-   CORREÇÃO DESKTOP - HEADER NO TOPO
-========================= */
-
-@media (min-width: 769px) {
-    header {
-        position: relative !important;
-        top: auto !important;
-        bottom: auto !important;
-        left: auto !important;
-        right: auto !important;
-        width: 100% !important;
-        z-index: 1000 !important;
-    }
-
-    .menu-mobile-btn {
-        display: none !important;
-    }
-
-    .menu {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-
-    .menu a {
-        display: inline-block !important;
-    }
-
-    #inicio {
-        margin-top: 0 !important;
-        padding-top: 120px !important;
-    }
-}
-
-/* =========================
-   AJUSTE AVATAR STAFF
-========================= */
-
-.staff-avatar{
-    overflow:hidden !important;
-}
-
-.staff-avatar img{
-    width:100% !important;
-    height:100% !important;
-    object-fit:cover !important;
-    display:block !important;
-}
-
-.staff-avatar img.avatar-sd-bizonho{
-    object-fit:cover !important;
-    object-position:center center !important;
-    transform:scale(1.18) translateY(2px) !important;
-    transform-origin:center center !important;
-}
-
-.staff-avatar img.avatar-sgt-bisonho{
-    object-fit:cover !important;
-    object-position:center center !important;
-    transform:scale(1.08) !important;
-    transform-origin:center center !important;
-}
-/* =========================
-   CORREÇÃO DESKTOP EQUIPE
-========================= */
-
-@media (min-width: 901px){
-    .equipe-section .staff-grid{
-        display:grid !important;
-        grid-template-columns:repeat(2, 320px) !important;
-        justify-content:center !important;
-        align-items:start !important;
-        gap:35px !important;
-        width:auto !important;
-        max-width:none !important;
-        margin:55px auto 0 !important;
-    }
-
-    .equipe-section .staff-card{
-        width:320px !important;
-        min-height:430px !important;
-        padding:0 !important;
-        display:block !important;
-        position:relative !important;
-        overflow:hidden !important;
-    }
-
-    .equipe-section .staff-cover{
-        width:100% !important;
-        height:145px !important;
-    }
-
-    .equipe-section .staff-avatar{
-        width:125px !important;
-        height:125px !important;
-        margin:-65px auto 0 !important;
-    }
-
-    .equipe-section .staff-info{
-        text-align:center !important;
-        padding:25px 25px 35px !important;
-    }
-
-    .equipe-section .staff-info h3{
-        font-size:30px !important;
-        margin:10px 0 28px !important;
-    }
-}
+            if (menu) {
+                menu.classList.remove("menu-aberto");
+            }
+        });
+    });
+});
