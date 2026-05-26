@@ -2599,17 +2599,27 @@ button:hover{
    AJUSTE AVATAR STAFF
 ========================= */
 
-.staff-avatar {
-    overflow: hidden;
+.staff-avatar{
+    overflow:hidden !important;
 }
 
-.staff-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.staff-avatar img{
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    display:block !important;
 }
 
-.staff-avatar img.avatar-sgt-bisonho {
-    object-position: center 42%;
-    transform: scale(1.08);
+.staff-avatar img.avatar-sd-bizonho{
+    object-fit:cover !important;
+    object-position:center center !important;
+    transform:scale(1.22) translateY(2px) !important;
+    transform-origin:center center !important;
+}
+
+.staff-avatar img.avatar-sgt-bisonho{
+    object-fit:cover !important;
+    object-position:center center !important;
+    transform:scale(1.08) !important;
+    transform-origin:center center !important;
 }
