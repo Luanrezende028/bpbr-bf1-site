@@ -2625,3 +2625,49 @@ button:hover{
     transform:scale(1.08) !important;
     transform-origin:center center !important;
 }
+/* =========================
+   CORREÇÃO DESKTOP EQUIPE
+========================= */
+
+@media (min-width: 901px){
+    .equipe-section .staff-grid{
+        display:grid !important;
+        grid-template-columns:repeat(2, 320px) !important;
+        justify-content:center !important;
+        align-items:start !important;
+        gap:35px !important;
+        width:auto !important;
+        max-width:none !important;
+        margin:55px auto 0 !important;
+    }
+
+    .equipe-section .staff-card{
+        width:320px !important;
+        min-height:430px !important;
+        padding:0 !important;
+        display:block !important;
+        position:relative !important;
+        overflow:hidden !important;
+    }
+
+    .equipe-section .staff-cover{
+        width:100% !important;
+        height:145px !important;
+    }
+
+    .equipe-section .staff-avatar{
+        width:125px !important;
+        height:125px !important;
+        margin:-65px auto 0 !important;
+    }
+
+    .equipe-section .staff-info{
+        text-align:center !important;
+        padding:25px 25px 35px !important;
+    }
+
+    .equipe-section .staff-info h3{
+        font-size:30px !important;
+        margin:10px 0 28px !important;
+    }
+}
