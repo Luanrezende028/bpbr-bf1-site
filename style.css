@@ -1168,8 +1168,9 @@ footer:hover{
         font-size:42px;
     }
 
-    .vantagens-grid{column;
-    }
+    .vantagens-grid{
+    grid-template-columns:1fr;
+}
 
     .staff-grid{
         grid-template-columns:1fr;
@@ -1341,16 +1342,17 @@ footer:hover{
     margin:0 !important;
     transition:.25s ease;
     cursor:default;
-        grid-template-columns:1fr;
-    }
+}
 
+@media(max-width:900px){
     .apresentacao-card h2{
         font-size:42px;
     }
 
     .apresentacao-botoes{
-        flex-direction:
-}
+        flex-direction:column;
+    }
+}}
 
 .server-info-premium p:hover{
     transform:translateY(-3px) scale(1.05);
@@ -2613,7 +2615,7 @@ button:hover{
 .staff-avatar img.avatar-sd-bizonho{
     object-fit:cover !important;
     object-position:center center !important;
-    transform:scale(1.22) translateY(2px) !important;
+    transform:scale(1.18) translateY(2px) !important;
     transform-origin:center center !important;
 }
 
