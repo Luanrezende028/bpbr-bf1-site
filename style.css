@@ -2248,3 +2248,136 @@ footer:hover{
         transform-origin:center center !important;
     }
 }
+/* BOTÃO VOLTAR AO INÍCIO -  */
+
+.btn-voltar-topo{
+    position:fixed;
+    right:24px;
+    bottom:24px;
+    height:50px;
+    padding:0 22px 0 12px;
+    border:1px solid rgba(255,215,0,.75);
+    border-radius:999px;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    background:linear-gradient(135deg,#ffd700,#ff9f00);
+    color:#080808;
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    z-index:999999;
+    cursor:pointer;
+    box-shadow:
+        0 0 18px rgba(255,215,0,.42),
+        0 12px 30px rgba(0,0,0,.65);
+    transition:.25s ease;
+}
+
+.btn-voltar-topo::before{
+    content:"";
+    position:absolute;
+    inset:3px;
+    border-radius:999px;
+    border:1px solid rgba(0,0,0,.18);
+    pointer-events:none;
+}
+
+.btn-voltar-topo.mostrar{
+    display:flex;
+    animation:botaoTopoEntrada .35s ease forwards, botaoTopoFlutuar 2.8s ease-in-out infinite;
+}
+
+@keyframes botaoTopoEntrada{
+    from{
+        opacity:0;
+        transform:translateY(16px) scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+@keyframes botaoTopoFlutuar{
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-4px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+.btn-voltar-topo:hover{
+    transform:translateY(-5px) scale(1.04);
+    filter:brightness(1.06);
+    box-shadow:
+        0 0 25px rgba(255,215,0,.62),
+        0 15px 34px rgba(0,0,0,.72);
+}
+
+.btn-voltar-seta{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(145deg,#151515,#050505);
+    color:#ffd700;
+    font-size:21px;
+    font-weight:900;
+    line-height:1;
+    box-shadow:inset 0 0 0 1px rgba(255,215,0,.40);
+    animation:setaTopoPulsar 1.8s ease-in-out infinite;
+}
+
+@keyframes setaTopoPulsar{
+    0%{
+        box-shadow:
+            inset 0 0 0 1px rgba(255,215,0,.40),
+            0 0 0 rgba(255,215,0,0);
+    }
+
+    50%{
+        box-shadow:
+            inset 0 0 0 1px rgba(255,215,0,.65),
+            0 0 13px rgba(255,215,0,.45);
+    }
+
+    100%{
+        box-shadow:
+            inset 0 0 0 1px rgba(255,215,0,.40),
+            0 0 0 rgba(255,215,0,0);
+    }
+}
+
+.btn-voltar-texto{
+    white-space:nowrap;
+}
+
+@media(max-width:768px){
+    .btn-voltar-topo{
+        right:14px;
+        bottom:14px;
+        height:46px;
+        padding:0 15px 0 9px;
+        gap:9px;
+        font-size:10px;
+        letter-spacing:.7px;
+    }
+
+    .btn-voltar-seta{
+        width:29px;
+        height:29px;
+        font-size:19px;
+    }
+}
