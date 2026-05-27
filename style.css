@@ -1486,15 +1486,14 @@ button:hover{
 }
 
 .staff-avatar img.avatar-sd-bizonho{
-    width:88% !important;
-    height:88% !important;
-    margin:6% !important;
-    object-fit:contain !important;
+    width:100% !important;
+    height:100% !important;
+    margin:0 !important;
+    object-fit:cover !important;
     object-position:center center !important;
-    transform:none !important;
+    transform:scale(1.23) translateY(2px) !important;
     transform-origin:center center !important;
 }
-
 .staff-avatar img.avatar-sgt-bisonho{
     object-fit:cover !important;
     object-position:center center !important;
