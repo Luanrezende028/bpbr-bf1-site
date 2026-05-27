@@ -2237,3 +2237,14 @@ footer:hover{
         display:inline-block !important;
     }
 }
+@media(max-width:900px){
+    .staff-avatar img.avatar-sd-bizonho{
+        width:100% !important;
+        height:100% !important;
+        margin:0 !important;
+        object-fit:cover !important;
+        object-position:center center !important;
+        transform:scale(1.24) translateY(5px) !important;
+        transform-origin:center center !important;
+    }
+}
