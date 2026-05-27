@@ -1,6 +1,6 @@
 // =====================================================
 // SCRIPT BPBR
-// Desenvolvido por Rezende000
+// Desenvolvido por Rezende
 // =====================================================
 
 // =====================================================
@@ -42,13 +42,10 @@ const EVENTO_SEMANA = {
     }
 };
 
-// =====================================================
-// TRADUÇÕES
-// =====================================================
-
 const TRADUCOES = {
     pt: {
         menu: ["INÍCIO", "SERVIDORES", "EVENTOS", "VIP", "SOBRE", "ALISTAMENTO", "EQUIPE", "GALERIA"],
+        voltarTopo: "VOLTAR AO INÍCIO",
 
         inicioTitulo: "BATALHÃO PARAQUEDISTA",
         inicioSub: "Comunidade Oficial Battlefield 1",
@@ -111,6 +108,7 @@ const TRADUCOES = {
 
     en: {
         menu: ["HOME", "SERVERS", "EVENTS", "VIP", "ABOUT", "ENLISTMENT", "TEAM", "GALLERY"],
+        voltarTopo: "BACK TO TOP",
 
         inicioTitulo: "PARATROOPER BATTALION",
         inicioSub: "Official Battlefield 1 Community",
@@ -173,6 +171,7 @@ const TRADUCOES = {
 
     es: {
         menu: ["INICIO", "SERVIDORES", "EVENTOS", "VIP", "SOBRE", "ALISTAMIENTO", "EQUIPO", "GALERÍA"],
+        voltarTopo: "VOLVER AL INICIO",
 
         inicioTitulo: "BATALLÓN PARACAIDISTA",
         inicioSub: "Comunidad Oficial Battlefield 1",
@@ -345,7 +344,7 @@ function trocarIdioma(idioma) {
     const t = TRADUCOES[idioma];
     const evento = EVENTO_SEMANA[idioma];
 
-    if (!t || !evento) return;
+    alterarTexto(".btn-voltar-texto", t.voltarTopo);
 
     alterarTodos(".menu a", t.menu);
 
@@ -457,4 +456,28 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
+});
+// =====================================================
+// BOTÃO VOLTAR AO INÍCIO
+// =====================================================
+
+function voltarAoTopo() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+window.voltarAoTopo = voltarAoTopo;
+
+window.addEventListener("scroll", function() {
+    const botaoTopo = document.getElementById("btn-voltar-topo");
+
+    if (!botaoTopo) return;
+
+    if (window.scrollY > 500) {
+        botaoTopo.classList.add("mostrar");
+    } else {
+        botaoTopo.classList.remove("mostrar");
+    }
 });
