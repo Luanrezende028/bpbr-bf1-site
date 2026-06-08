@@ -2381,3 +2381,135 @@ footer:hover{
         font-size:19px;
     }
 }
+/* NOMES, CARGOS E PATENTES DA EQUIPE  */
+
+.staff-info h3{
+    font-family:"Cinzel", Arial, sans-serif !important;
+    font-weight:900 !important;
+    letter-spacing:1px !important;
+    position:relative;
+    display:inline-block;
+    transition:
+        transform .35s ease,
+        text-shadow .35s ease,
+        filter .35s ease;
+}
+
+/* SD Bizonh0 */
+.staff-grid .staff-card:nth-child(1) .staff-info h3{
+    background:linear-gradient(90deg,#ffffff,#ffd700,#ffffff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:none;
+}
+
+/* SGT_bisonho */
+.staff-grid .staff-card:nth-child(2) .staff-info h3{
+    background:linear-gradient(90deg,#ffffff,#4fd8ff,#ffffff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:none;
+}
+
+/* Rezende */
+.staff-grid .staff-card:nth-child(3) .staff-info h3{
+    background:linear-gradient(90deg,#ffffff,#ffd700,#ff3b3b);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:none;
+}
+
+/* Maj_Tiringa */
+.staff-grid .staff-card:nth-child(4) .staff-info h3{
+    background:linear-gradient(90deg,#ffffff,#ffd700,#ff9900);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:none;
+}
+
+/* Linha dourada abaixo do nome */
+.staff-info h3::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-8px;
+    width:0;
+    height:2px;
+    border-radius:20px;
+    background:linear-gradient(90deg, transparent, #ffd700, transparent);
+    transform:translateX(-50%);
+    transition:.35s ease;
+}
+
+/* Cargo e patente prontos para animação */
+.staff-cargo,
+.staff-patente{
+    display:block;
+    transition:
+        transform .32s ease,
+        letter-spacing .32s ease,
+        text-shadow .32s ease,
+        filter .32s ease;
+}
+
+/* Hover no card - nome */
+.staff-card:hover .staff-info h3{
+    transform:translateY(-5px) scale(1.08);
+    filter:brightness(1.18);
+}
+
+.staff-card:hover .staff-info h3::after{
+    width:100%;
+}
+
+/* Hover no card - cargo */
+.staff-card:hover .staff-cargo{
+    transform:translateX(-6px) scale(1.04);
+    letter-spacing:4px;
+    filter:brightness(1.18);
+    text-shadow:
+        0 0 10px rgba(255,215,0,.55),
+        0 0 22px rgba(255,153,0,.25);
+}
+
+/* Hover no card - patente */
+.staff-card:hover .staff-patente{
+    transform:translateX(6px) scale(1.05);
+    letter-spacing:2px;
+    filter:brightness(1.25);
+    text-shadow:
+        0 0 10px rgba(79,216,255,.65),
+        0 0 24px rgba(79,216,255,.30);
+}
+
+/* Detalhe extra por card */
+.staff-grid .staff-card:nth-child(1):hover .staff-patente,
+.staff-grid .staff-card:nth-child(2):hover .staff-patente{
+    color:#4fd8ff !important;
+}
+
+.staff-grid .staff-card:nth-child(3):hover .staff-cargo{
+    color:#ffd700 !important;
+}
+
+.staff-grid .staff-card:nth-child(4):hover .staff-cargo{
+    color:#ffd700 !important;
+}
+
+/* Mobile */
+@media(max-width:900px){
+    .staff-info h3{
+        font-size:18px !important;
+        letter-spacing:.5px !important;
+    }
+
+    .staff-card:hover .staff-info h3{
+        transform:translateY(-3px) scale(1.04);
+    }
+
+    .staff-card:hover .staff-cargo,
+    .staff-card:hover .staff-patente{
+        transform:scale(1.03);
+        letter-spacing:2px;
+    }
+}
