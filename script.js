@@ -481,3 +481,47 @@ window.addEventListener("scroll", function() {
         botaoTopo.classList.remove("mostrar");
     }
 });
+async function carregarStatusDiscord() {
+    try {
+        const resposta = await fetch(
+            "http://node1.quaxly.com:25113/status-discord"
+        );
+
+        if (!resposta.ok) {
+            throw new Error(`Erro HTTP: ${resposta.status}`);
+        }
+
+        const dados = await resposta.json();
+
+        const membersEl = document.getElementById("discord-members");
+        const onlineEl = document.getElementById("discord-online");
+        const voiceEl = document.getElementById("discord-voice");
+
+        if (membersEl) {
+            membersEl.innerText = dados.members ?? "0";
+        }
+
+        if (onlineEl) {
+            onlineEl.innerText = dados.online ?? "0";
+        }
+
+        if (voiceEl) {
+            voiceEl.innerText = dados.voice ?? "0";
+        }
+
+        console.log("✅ Status Discord carregado:", dados);
+
+    } catch (erro) {
+        console.error("❌ Erro ao carregar status do Discord:", erro);
+
+        document.getElementById("discord-members").innerText = "--";
+        document.getElementById("discord-online").innerText = "--";
+        document.getElementById("discord-voice").innerText = "--";
+    }
+}
+
+/* Carrega ao abrir */
+carregarStatusDiscord();
+
+/* Atualiza sozinho */
+setInterval(carregarStatusDiscord, 30000);
