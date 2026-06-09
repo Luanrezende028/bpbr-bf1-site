@@ -458,65 +458,113 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 // =====================================================
-// BOTÃO VOLTAR AO INÍCIO
+// STATUS DISCORD BPBR + CONTADOR ANIMADO
 // =====================================================
 
-function voltarAoTopo() {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
+const API_DISCORD =
+    "http://node1.quaxly.com:25113/status-discord";
 
-window.voltarAoTopo = voltarAoTopo;
+function animarNumero(id, novoValor) {
+    const elemento = document.getElementById(id);
 
-window.addEventListener("scroll", function() {
-    const botaoTopo = document.getElementById("btn-voltar-topo");
+    if (!elemento) return;
 
-    if (!botaoTopo) return;
+    const valorAtual =
+        parseInt(elemento.innerText) || 0;
 
-    if (window.scrollY > 500) {
-        botaoTopo.classList.add("mostrar");
-    } else {
-        botaoTopo.classList.remove("mostrar");
-    }
-});
-async function carregarStatusDiscord() {
-    try {
-        const resposta = await fetch(
-            "http://node1.quaxly.com:25113/status-discord"
+    const valorFinal =
+        Number(novoValor) || 0;
+
+    const duracao = 1000;
+    const inicio = performance.now();
+
+    function atualizar(tempoAtual) {
+        const progresso = Math.min(
+            (tempoAtual - inicio) / duracao,
+            1
         );
 
+        const valor =
+            Math.floor(
+                valorAtual +
+                (valorFinal - valorAtual) *
+                progresso
+            );
+
+        elemento.innerText = valor;
+
+        if (progresso < 1) {
+            requestAnimationFrame(atualizar);
+        } else {
+            elemento.innerText = valorFinal;
+        }
+    }
+
+    requestAnimationFrame(atualizar);
+}
+
+async function carregarStatusDiscord() {
+    try {
+        const resposta = await fetch(API_DISCORD);
+
         if (!resposta.ok) {
-            throw new Error(`Erro HTTP: ${resposta.status}`);
+            throw new Error(
+                `Erro HTTP: ${resposta.status}`
+            );
         }
 
-        const dados = await resposta.json();
+        const dados =
+            await resposta.json();
 
-        const membersEl = document.getElementById("discord-members");
-        const onlineEl = document.getElementById("discord-online");
-        const voiceEl = document.getElementById("discord-voice");
+        animarNumero(
+            "discord-members",
+            dados.members ?? 0
+        );
 
-        if (membersEl) {
-            membersEl.innerText = dados.members ?? "0";
-        }
+        animarNumero(
+            "discord-online",
+            dados.online ?? 0
+        );
 
-        if (onlineEl) {
-            onlineEl.innerText = dados.online ?? "0";
-        }
+        animarNumero(
+            "discord-voice",
+            dados.voice ?? 0
+        );
 
-        if (voiceEl) {
-            voiceEl.innerText = dados.voice ?? "0";
-        }
-
-        console.log("✅ Status Discord carregado:", dados);
+        console.log(
+            "✅ Status Discord carregado:",
+            dados
+        );
 
     } catch (erro) {
-        console.error("❌ Erro ao carregar status do Discord:", erro);
+        console.error(
+            "❌ Erro ao carregar status do Discord:",
+            erro
+        );
 
-        document.getElementById("discord-members").innerText = "--";
-        document.getElementById("discord-online").innerText = "--";
-        document.getElementById("discord-voice").innerText = "--";
+        const members =
+            document.getElementById(
+                "discord-members"
+            );
+
+        const online =
+            document.getElementById(
+                "discord-online"
+            );
+
+        const voice =
+            document.getElementById(
+                "discord-voice"
+            );
+
+        if (members)
+            members.innerText = "--";
+
+        if (online)
+            online.innerText = "--";
+
+        if (voice)
+            voice.innerText = "--";
     }
 }
 
@@ -524,4 +572,7 @@ async function carregarStatusDiscord() {
 carregarStatusDiscord();
 
 /* Atualiza sozinho */
-setInterval(carregarStatusDiscord, 30000);
+setInterval(
+    carregarStatusDiscord,
+    30000
+);
