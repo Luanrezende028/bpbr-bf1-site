@@ -462,7 +462,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // =====================================================
 
 const API_DISCORD =
-    "http://node1.quaxly.com:25113/status-discord";
+     "https://node1.quaxly.com:25113/status-discord";
 
 function animarNumero(id, novoValor) {
     const elemento = document.getElementById(id);
