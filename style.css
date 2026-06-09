@@ -2817,3 +2817,230 @@ footer:hover{
         padding: 28px;
     }
 }
+/* =========================================================
+   CORREÇÃO MOBILE - BPBR
+========================================================= */
+
+@media (max-width: 600px) {
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    section,
+    header,
+    .container,
+    .hero,
+    .server-section,
+    .discord-section,
+    .alistamento-section {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .server-card,
+    .discord-panel,
+    .alistamento-card,
+    .info-card,
+    .card {
+        width: calc(100% - 28px);
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+    }
+
+    h1,
+    h2,
+    h3 {
+        max-width: 100%;
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    .server-section h2,
+    .alistamento-section h2,
+    .discord-panel-header h2 {
+        font-size: 34px !important;
+        line-height: 1.1;
+        text-align: center;
+    }
+
+    .discord-panel-header,
+    .server-section,
+    .alistamento-section {
+        text-align: center;
+    }
+
+    .discord-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .discord-card {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .server-card img,
+    .server-image,
+    .map-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .server-info,
+    .server-stats {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .alistamento-card {
+        padding: 28px 22px;
+    }
+
+    .alistamento-card ul,
+    .alistamento-card li {
+        max-width: 100%;
+    }
+
+    .alistamento-card li {
+        font-size: 17px;
+        line-height: 1.25;
+    }
+
+    .btn,
+    .btn-discord,
+    .btn-server,
+    .back-top {
+        max-width: 100%;
+        white-space: normal;
+    }
+}
+/* =========================================================
+   CORREÇÃO RESPONSIVA - EVENTOS
+========================================================= */
+
+.evento-card {
+    width: 100%;
+    max-width: 1050px;
+    box-sizing: border-box;
+}
+
+.evento-imagem img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* quando a janela ficar menor, imagem vai para cima e texto embaixo */
+@media (max-width: 1100px) {
+    .evento-card {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 30px;
+        padding: 28px !important;
+    }
+
+    .evento-imagem,
+    .evento-conteudo {
+        width: 100% !important;
+        max-width: 620px !important;
+    }
+
+    .evento-conteudo {
+        text-align: center;
+    }
+
+    .evento-conteudo h3 {
+        font-size: 54px !important;
+        line-height: 1;
+    }
+
+    .evento-detalhes {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .evento-card {
+        padding: 22px !important;
+    }
+
+    .evento-conteudo h3 {
+        font-size: 38px !important;
+    }
+
+    .evento-detalhes {
+        grid-template-columns: 1fr;
+    }
+
+    .evento-imagem,
+    .evento-conteudo {
+        max-width: 100% !important;
+    }
+}
+
+/* =========================================================
+   FIX DEFINITIVO - DISCORD MOBILE CENTRALIZADO
+========================================================= */
+
+@media screen and (max-width: 768px) {
+
+    #discord-status {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 30px 0 !important;
+        margin: 0 auto !important;
+    }
+
+    #discord-status .discord-panel {
+        width: calc(100% - 32px) !important;
+        max-width: 360px !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+
+        position: relative !important;
+        left: unset !important;
+        right: unset !important;
+        transform: none !important;
+
+        padding: 22px !important;
+    }
+
+    #discord-status .discord-panel-header {
+        text-align: center !important;
+    }
+
+    #discord-status .discord-cards {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        gap: 14px !important;
+    }
+
+    #discord-status .discord-card {
+        width: 100% !important;
+        max-width: 100% !important;
+
+        margin: 0 auto !important;
+
+        justify-content: flex-start !important;
+        text-align: left !important;
+    }
+
+    #discord-status .discord-card strong {
+        font-size: 34px !important;
+    }
+}
