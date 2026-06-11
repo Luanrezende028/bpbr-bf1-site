@@ -270,8 +270,8 @@ function alterarTodos(seletor, textos) {
 async function carregarServidor() {
     try {
         const resposta = await fetch(
-            "https://api.gametools.network/bf1/servers?name=%2301(BPBR)&platform=pc"
-        );
+    "https://api.gametools.network/bf1/servers?name=%2301(BPBR)&platform=pc"
+);
 
         if (!resposta.ok) return;
 
