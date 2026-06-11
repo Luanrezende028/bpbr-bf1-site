@@ -270,15 +270,23 @@ function alterarTodos(seletor, textos) {
 async function carregarServidor() {
     try {
         const resposta = await fetch(
-    "https://api.gametools.network/bf1/servers?name=%2301(BPBR)&platform=pc"
-);
+            "https://api.gametools.network/bf1/servers?name=BPBR&platform=pc"
+        );
 
-        if (!resposta.ok) return;
+        if (!resposta.ok) {
+            throw new Error("Erro GameTools");
+        }
 
         const dados = await resposta.json();
-        if (!dados.servers || dados.servers.length === 0) return;
 
-        const servidor = dados.servers[0];
+        if (!dados.servers || dados.servers.length === 0) {
+            throw new Error("Servidor BPBR não encontrado");
+        }
+
+        const servidor = dados.servers.find(s =>
+            (s.name || "").toLowerCase().includes("bpbr") ||
+            (s.prefix || "").toLowerCase().includes("bpbr")
+        ) || dados.servers[0];
 
         const serverName = document.getElementById("server-name");
         const players = document.getElementById("players");
@@ -288,30 +296,44 @@ async function carregarServidor() {
         const serverImage = document.getElementById("server-image");
         const barraFill = document.getElementById("server-barra-fill");
 
-        if (serverName) serverName.innerText = servidor.prefix || servidor.name || "Servidor BPBR";
-        if (players) players.innerText = (servidor.playerAmount ?? "--") + "/" + (servidor.maxPlayers ?? "--");
-        if (queue) queue.innerText = servidor.inQue ?? "--";
-        if (map) map.innerText = servidor.currentMap ?? "--";
-        if (mode) mode.innerText = servidor.mode ?? "--";
-
-        if (serverImage && servidor.url) {
-            serverImage.src = servidor.url + "?t=" + Date.now();
+        if (serverName) {
+            serverName.innerText = servidor.name || servidor.prefix || "Servidor BPBR";
         }
 
-        if (barraFill && servidor.maxPlayers) {
-            const porcentagem = Math.min(
-                100,
-                Math.round((servidor.playerAmount / servidor.maxPlayers) * 100)
-            );
+        if (players) {
+            players.innerText = `${servidor.playerAmount ?? 0}/${servidor.maxPlayers ?? 64}`;
+        }
+
+        if (queue) {
+            queue.innerText = servidor.inQue ?? 0;
+        }
+
+        if (map) {
+            map.innerText = servidor.currentMap || "--";
+        }
+
+        if (mode) {
+            mode.innerText = servidor.mode || "Conquest";
+        }
+
+        if (serverImage && servidor.url) {
+            serverImage.src = servidor.url;
+        }
+
+        if (barraFill) {
+            const atual = servidor.playerAmount ?? 0;
+            const max = servidor.maxPlayers ?? 64;
+            const porcentagem = Math.min(100, Math.round((atual / max) * 100));
 
             barraFill.style.width = porcentagem + "%";
         }
 
+        console.log("✅ Servidor carregado:", servidor);
+
     } catch (erro) {
-        console.log("Erro ao carregar servidor:", erro);
+        console.error("❌ Erro ao carregar servidor:", erro);
     }
 }
-
 // =====================================================
 // EFEITO DO MOUSE NO FUNDO
 // =====================================================
@@ -463,7 +485,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 const API_DISCORD =
      "http://node1.quaxly.com:25113/status-discord";
-const API_D
 function animarNumero(id, novoValor) {
     const elemento = document.getElementById(id);
 
